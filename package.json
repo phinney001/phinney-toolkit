@@ -1,0 +1,24 @@
+{
+  "name": "phinney-toolkit",
+  "version": "1.0.0",
+  "description": "toolkit",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phinney001/Toolkit.git"
+  },
+  "keywords": [
+    "toolkit",
+    "tool",
+    "untils"
+  ],
+  "author": "phinney",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phinney001/Toolkit/issues"
+  },
+  "homepage": "https://github.com/phinney001/Toolkit#readme"
+}
