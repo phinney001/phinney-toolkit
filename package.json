@@ -4,6 +4,8 @@
   "description": "toolkit",
   "main": "index.js",
   "scripts": {
+    "compile": "babel -o index.js src/index.js",
+    "prepublish": "npm run compile",
     "test": "npm run test"
   },
   "repository": {
@@ -20,5 +22,12 @@
   "bugs": {
     "url": "https://github.com/phinney001/Toolkit/issues"
   },
-  "homepage": "https://github.com/phinney001/Toolkit#readme"
+  "homepage": "https://github.com/phinney001/Toolkit#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.10.4",
+    "@babel/preset-env": "^7.10.4"
+  }
 }
