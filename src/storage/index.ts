@@ -15,55 +15,41 @@ export class Storage {
     this.proto = proto
   }
 
-  /**
-   * 存储数据长度
-   * @returns {Number}
-   */
+  // 存储数据长度
   get size() {
     return this.proto.length
   }
 
-  /**
-   * 存储数据名集合
-   * @returns {Array<String>}
-   */
+  // 存储数据名集合
   get keys(): Array<string> {
     return Object.keys(this.proto)
   }
 
-  /**
-   * 存储数据值集合
-   * @returns {Array<*>}
-   */
-  get values(): Array<unknown> {
+  // 存储数据值集合
+  get values(): Array<any> {
     return Object.keys(this.proto).map(key => this.get(key))
   }
 
-  /**
-   * 存储数据键值对集合
-   * @returns {Array<{key:value}>}
-   */
+  // 存储数据键值对集合
   get entries(): Array<any> {
     return Object.keys(this.proto).map((key) => [key, this.get(key)])
   }
 
   /**
    * 设置数据存储
-   * @param {String} key 数据名
-   * @param {*} val 数据值
-   * @returns {Storage}
+   * @param key 数据名
+   * @param val 数据值
    */
-  set(key: string, val: unknown) {
+  set(key: string, val: any): Storage {
     this.proto.setItem(key, JSON.stringify(val))
     return this
   }
 
   /**
    * 获取数据存储
-   * @param {String} key 数据名
-   * @returns {*}
+   * @param key 数据名
    */
-  get(key: string) {
+  get(key: string): any {
     let result = this.proto.getItem(key)
     try {
       result = JSON.parse(result)
@@ -73,26 +59,25 @@ export class Storage {
 
   /**
    * 是否包含某个数据存储
-   * @param {String} key 数据名
-   * @returns {Boolean}
+   * @param key 数据名
    */
-  has(key: string) {
+  has(key: string): boolean {
     return Reflect.has(this.proto, key)
   }
 
   /**
    * 删除数据存储
-   * @param {String} key 数据名
+   * @param key 数据名
    */
-  delete(key: string) {
+  delete(key: string): void {
     this.proto.removeItem(key)
   }
 
   /**
    * 清空数据存储
-   * @param {Array<String>} except 需要保留的数据存储
+   * @param except 需要保留的数据存储
    */
-  clear(except: Array<string>) {
+  clear(except: Array<string>): void {
     if (except) {
       this.keys.forEach((key) => {
         if (!except.includes(key)) {
@@ -106,9 +91,9 @@ export class Storage {
 
   /**
    * 数据存储循环
-   * @param {(key, value) => void} cb 回调函数
+   * @param cb 回调函数
    */
-  forEach(cb: (key: string, value: unknown) => void): void {
+  forEach(cb: (key: string, value: any) => void): void {
     this.entries.forEach(([key, value]) => {
       cb(key, value)
     })

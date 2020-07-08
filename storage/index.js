@@ -31,10 +31,7 @@ var Storage = /** @class */ (function () {
         this.proto = proto;
     }
     Object.defineProperty(Storage.prototype, "size", {
-        /**
-         * 存储数据长度
-         * @returns {Number}
-         */
+        // 存储数据长度
         get: function () {
             return this.proto.length;
         },
@@ -42,10 +39,7 @@ var Storage = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(Storage.prototype, "keys", {
-        /**
-         * 存储数据名集合
-         * @returns {Array<String>}
-         */
+        // 存储数据名集合
         get: function () {
             return Object.keys(this.proto);
         },
@@ -53,10 +47,7 @@ var Storage = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(Storage.prototype, "values", {
-        /**
-         * 存储数据值集合
-         * @returns {Array<*>}
-         */
+        // 存储数据值集合
         get: function () {
             var _this = this;
             return Object.keys(this.proto).map(function (key) { return _this.get(key); });
@@ -65,10 +56,7 @@ var Storage = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(Storage.prototype, "entries", {
-        /**
-         * 存储数据键值对集合
-         * @returns {Array<{key:value}>}
-         */
+        // 存储数据键值对集合
         get: function () {
             var _this = this;
             return Object.keys(this.proto).map(function (key) { return [key, _this.get(key)]; });
@@ -78,9 +66,8 @@ var Storage = /** @class */ (function () {
     });
     /**
      * 设置数据存储
-     * @param {String} key 数据名
-     * @param {*} val 数据值
-     * @returns {Storage}
+     * @param key 数据名
+     * @param val 数据值
      */
     Storage.prototype.set = function (key, val) {
         this.proto.setItem(key, JSON.stringify(val));
@@ -88,8 +75,7 @@ var Storage = /** @class */ (function () {
     };
     /**
      * 获取数据存储
-     * @param {String} key 数据名
-     * @returns {*}
+     * @param key 数据名
      */
     Storage.prototype.get = function (key) {
         var result = this.proto.getItem(key);
@@ -101,22 +87,21 @@ var Storage = /** @class */ (function () {
     };
     /**
      * 是否包含某个数据存储
-     * @param {String} key 数据名
-     * @returns {Boolean}
+     * @param key 数据名
      */
     Storage.prototype.has = function (key) {
         return Reflect.has(this.proto, key);
     };
     /**
      * 删除数据存储
-     * @param {String} key 数据名
+     * @param key 数据名
      */
     Storage.prototype.delete = function (key) {
         this.proto.removeItem(key);
     };
     /**
      * 清空数据存储
-     * @param {Array<String>} except 需要保留的数据存储
+     * @param except 需要保留的数据存储
      */
     Storage.prototype.clear = function (except) {
         var _this = this;
@@ -133,7 +118,7 @@ var Storage = /** @class */ (function () {
     };
     /**
      * 数据存储循环
-     * @param {(key, value) => void} cb 回调函数
+     * @param cb 回调函数
      */
     Storage.prototype.forEach = function (cb) {
         this.entries.forEach(function (_a) {
