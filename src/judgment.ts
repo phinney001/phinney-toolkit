@@ -3,7 +3,7 @@
  * @param data 数据
  * @param containNull 是否包含null
  */
-export const isObject = (data, containNull = false) => {
+export const isObject = (data: any, containNull = false) => {
   if (containNull) {
     return typeof data === 'object'
   }
@@ -14,7 +14,7 @@ export const isObject = (data, containNull = false) => {
  * 判断是否是数组
  * @param data 数据
  */
-export const isArray = (data) => {
+export const isArray = (data: any) => {
   return data instanceof Array
 }
 
@@ -23,7 +23,7 @@ export const isArray = (data) => {
  * @param data 数据
  * @param containNaN 是否包含NaN
  */
-export const isNumber = (data, containNaN = false) => {
+export const isNumber = (data: any, containNaN = false) => {
   if (containNaN) {
     return typeof data === 'number'
   }
@@ -34,7 +34,7 @@ export const isNumber = (data, containNaN = false) => {
  * 判断是否是字符串
  * @param data 数据
  */
-export const isString = (data) => {
+export const isString = (data: any) => {
   return typeof data === 'string'
 }
 
@@ -42,7 +42,7 @@ export const isString = (data) => {
  * 判断是否是布尔值
  * @param data 数据
  */
-export const isBoolean = (data) => {
+export const isBoolean = (data: any) => {
   return typeof data === 'boolean'
 }
 
@@ -50,7 +50,7 @@ export const isBoolean = (data) => {
  * 判断是否是undefined
  * @param data 数据
  */
-export const isUndefined = (data) => {
+export const isUndefined = (data: any) => {
   return data === void 0
 }
 
@@ -58,7 +58,7 @@ export const isUndefined = (data) => {
  * 判断是否是null
  * @param data 数据
  */
-export const isNull = (data) => {
+export const isNull = (data: any) => {
   return data === null
 }
 
@@ -67,7 +67,7 @@ export const isNull = (data) => {
  * @param data 数据
  * @param trim 是否去除前后空字符串判断
  */
-export const isEmptyString = (data, trim = true) => {
+export const isEmptyString = (data: any, trim = true) => {
   if (isString(data)) {
     return false
   }

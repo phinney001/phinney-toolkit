@@ -6,9 +6,9 @@
  */
 export class Storage {
   // 存储原型
-  proto
+  proto: any
 
-  constructor(proto) {
+  constructor(proto: any) {
     if (![localStorage, sessionStorage].includes(proto)) {
       throw new Error('Arguments must be localStorage or sessionStorage!')
     }
@@ -27,24 +27,24 @@ export class Storage {
    * 存储数据名集合
    * @returns {Array<String>}
    */
-  get keys() {
-    return Reflect.ownKeys(this.proto)
+  get keys(): Array<string> {
+    return Object.keys(this.proto)
   }
 
   /**
    * 存储数据值集合
    * @returns {Array<*>}
    */
-  get values() {
-    return Reflect.ownKeys(this.proto).map(key => this.get(key))
+  get values(): Array<unknown> {
+    return Object.keys(this.proto).map(key => this.get(key))
   }
 
   /**
    * 存储数据键值对集合
    * @returns {Array<{key:value}>}
    */
-  get entries() {
-    return Reflect.ownKeys(this.proto).map((key) => [key, this.get(key)])
+  get entries(): Array<any> {
+    return Object.keys(this.proto).map((key) => [key, this.get(key)])
   }
 
   /**
@@ -53,7 +53,7 @@ export class Storage {
    * @param {*} val 数据值
    * @returns {Storage}
    */
-  set(key, val) {
+  set(key: string, val: unknown) {
     this.proto.setItem(key, JSON.stringify(val))
     return this
   }
@@ -63,7 +63,7 @@ export class Storage {
    * @param {String} key 数据名
    * @returns {*}
    */
-  get(key) {
+  get(key: string) {
     let result = this.proto.getItem(key)
     try {
       result = JSON.parse(result)
@@ -76,7 +76,7 @@ export class Storage {
    * @param {String} key 数据名
    * @returns {Boolean}
    */
-  has(key) {
+  has(key: string) {
     return Reflect.has(this.proto, key)
   }
 
@@ -84,7 +84,7 @@ export class Storage {
    * 删除数据存储
    * @param {String} key 数据名
    */
-  delete(key) {
+  delete(key: string) {
     this.proto.removeItem(key)
   }
 
@@ -92,9 +92,9 @@ export class Storage {
    * 清空数据存储
    * @param {Array<String>} except 需要保留的数据存储
    */
-  clear(except) {
+  clear(except: Array<string>) {
     if (except) {
-      this.keys.forEach(key => {
+      this.keys.forEach((key) => {
         if (!except.includes(key)) {
           this.delete(key)
         }
@@ -108,7 +108,7 @@ export class Storage {
    * 数据存储循环
    * @param {(key, value) => void} cb 回调函数
    */
-  forEach(cb) {
+  forEach(cb: (key: string, value: unknown) => void): void {
     this.entries.forEach(([key, value]) => {
       cb(key, value)
     })
