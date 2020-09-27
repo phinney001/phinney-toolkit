@@ -153,10 +153,44 @@ export const getValueListByChildId = (list: any[], value: any, valueName = 'valu
           ...t,
           c[valueName],
           ...(getValueListByChildId(c[childrenName], value, valueName, childrenName))
-        ];
+        ]
       }
-      return t;
+      return t
     }, [])
   }
-  return [];
+  return []
+}
+
+/**
+ * 数据类型处理中转
+ * @param data 数组数据
+ * @param valueType 返回数据类型
+ * @param otherArgs 其他参数
+ */
+export const transitData = (
+  data: any[],
+  valueType = 'array',
+  ...otherArgs: any[]
+) => {
+  if (data instanceof Array) {
+    if (valueType === 'array') {
+      return arrayToOptions(data, ...otherArgs)
+    }
+    if (valueType === 'object') {
+      return arrayToObject(data, ...otherArgs)
+    }
+    if (valueType === 'treeArray') {
+      return treeToOptions(data, ...otherArgs)
+    }
+    if (valueType === 'treeObject') {
+      return treeToObject(data, ...otherArgs)
+    }
+  }
+  if (['array', 'treeArray'].includes(valueType)) {
+    return []
+  }
+  if (['object', 'treeObject', 'treeCoordObject'].includes(valueType)) {
+    return {}
+  }
+  return data
 }

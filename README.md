@@ -121,5 +121,9 @@ BMapTransQMap: (lng: number, lat: number) => { lng: number, lat: number }
 ```
 #### 根据子节点id获取含有父级节点id列表
 ```javascript
-getValueListByChildId: (list: any[], value: any, valueName?: string, childrenName?: string) => any[];
+getValueListByChildId: (list: any[], value: any, valueName?: string, childrenName?: string) => any[]
+```
+#### 数据类型处理中转
+```javascript
+transitData: (data: any[], valueType?: string, ...otherArgs: any[]) => any
 ```

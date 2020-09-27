@@ -31,7 +31,7 @@ var __spread = (this && this.__spread) || function () {
     return ar;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getValueListByChildId = exports.BMapTransQMap = exports.QMapTransBMap = exports.treeToOptions = exports.treeToObject = exports.arrayToOptions = exports.arrayToObject = void 0;
+exports.transitData = exports.getValueListByChildId = exports.BMapTransQMap = exports.QMapTransBMap = exports.treeToOptions = exports.treeToObject = exports.arrayToOptions = exports.arrayToObject = void 0;
 var judgment_1 = require("../judgment");
 /**
  * 对象数组转对象（用户表格过滤下拉框）
@@ -161,4 +161,38 @@ exports.getValueListByChildId = function (list, value, valueName, childrenName) 
         }, []);
     }
     return [];
+};
+/**
+ * 数据类型处理中转
+ * @param data 数组数据
+ * @param valueType 返回数据类型
+ * @param otherArgs 其他参数
+ */
+exports.transitData = function (data, valueType) {
+    if (valueType === void 0) { valueType = 'array'; }
+    var otherArgs = [];
+    for (var _i = 2; _i < arguments.length; _i++) {
+        otherArgs[_i - 2] = arguments[_i];
+    }
+    if (data instanceof Array) {
+        if (valueType === 'array') {
+            return exports.arrayToOptions.apply(void 0, __spread([data], otherArgs));
+        }
+        if (valueType === 'object') {
+            return exports.arrayToObject.apply(void 0, __spread([data], otherArgs));
+        }
+        if (valueType === 'treeArray') {
+            return exports.treeToOptions.apply(void 0, __spread([data], otherArgs));
+        }
+        if (valueType === 'treeObject') {
+            return exports.treeToObject.apply(void 0, __spread([data], otherArgs));
+        }
+    }
+    if (['array', 'treeArray'].includes(valueType)) {
+        return [];
+    }
+    if (['object', 'treeObject', 'treeCoordObject'].includes(valueType)) {
+        return {};
+    }
+    return data;
 };

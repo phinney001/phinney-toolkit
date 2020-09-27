@@ -60,3 +60,10 @@ export declare const BMapTransQMap: (lng: number, lat: number) => {
  * @param childrenName 子级字段名称
  */
 export declare const getValueListByChildId: (list: any[], value: any, valueName?: string, childrenName?: string) => any[];
+/**
+ * 数据类型处理中转
+ * @param data 数组数据
+ * @param valueType 返回数据类型
+ * @param otherArgs 其他参数
+ */
+export declare const transitData: (data: any[], valueType?: string, ...otherArgs: any[]) => any;
