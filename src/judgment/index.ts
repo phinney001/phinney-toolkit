@@ -108,7 +108,7 @@ export const isNotNullOrUndefined = (data: any) => {
  * @param options valueName 节点id名称
  * @param options childrenName 子级字段名称
  */
-export const hasChild = (list: any[], options: any): boolean => {
+export const hasChild = (list: any[], options?: any): boolean => {
   const {
     value,
     valueName = 'value',

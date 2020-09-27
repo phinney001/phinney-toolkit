@@ -9,7 +9,7 @@ import { hasChild, isNumber } from '../judgment'
  */
 export const arrayToObject = (
   arr: any[],
-  options: any,
+  options?: any,
 ): any => {
   const {
     label = 'label',
@@ -33,7 +33,7 @@ export const arrayToObject = (
  */
 export const arrayToOptions = (
   arr: any[],
-  options: any,
+  options?: any,
 ): any => {
   const {
     label = 'label',
@@ -59,7 +59,7 @@ export const arrayToOptions = (
  */
 export const treeToObject = (
   arr: any[],
-  options: any,
+  options?: any,
 
 ): any => {
   const {
@@ -98,7 +98,7 @@ export const treeToObject = (
  */
 export const treeToOptions = (
   arr: any[],
-  options: any,
+  options?: any,
 ): any => {
   const {
     label = 'label',
@@ -135,7 +135,7 @@ export const treeToOptions = (
 export const transitData = (
   data: any[],
   valueType = 'array',
-  options: any
+  options?: any
 ) => {
   if (data instanceof Array) {
     if (valueType === 'array') {
@@ -204,7 +204,7 @@ export const BMapTransQMap = ({ lng, lat }: {lng: number, lat: number}) => {
  * @param options valueName 子级节点id名称
  * @param options childrenName 子级字段名称
  */
-export const getValueListByChildId = (list: any[], options: any): any[] => {
+export const getValueListByChildId = (list: any[], options?: any): any[] => {
   const {
     value,
     valueName = 'value',
@@ -241,7 +241,7 @@ export const getValueListByChildId = (list: any[], options: any): any[] => {
  * @param options rounding 是否四舍五入
  * @param options handle 数据自处理方法
  */
-export function precision(num: any, options: any) {
+export function precision(num: any, options?: any) {
   const {
     precision = 2,
     rounding = true,

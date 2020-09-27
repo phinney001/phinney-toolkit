@@ -63,4 +63,4 @@ export declare const isNotNullOrUndefined: (data: any) => boolean;
  * @param options valueName 节点id名称
  * @param options childrenName 子级字段名称
  */
-export declare const hasChild: (list: any[], options: any) => boolean;
+export declare const hasChild: (list: any[], options?: any) => boolean;
