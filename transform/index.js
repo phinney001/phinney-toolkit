@@ -31,7 +31,7 @@ var __spread = (this && this.__spread) || function () {
     return ar;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.transitData = exports.getValueListByChildId = exports.BMapTransQMap = exports.QMapTransBMap = exports.treeToOptions = exports.treeToObject = exports.arrayToOptions = exports.arrayToObject = void 0;
+exports.precision = exports.getValueListByChildId = exports.BMapTransQMap = exports.QMapTransBMap = exports.transitData = exports.treeToOptions = exports.treeToObject = exports.arrayToOptions = exports.arrayToObject = void 0;
 var judgment_1 = require("../judgment");
 /**
  * 对象数组转对象（用户表格过滤下拉框）
@@ -108,6 +108,36 @@ exports.treeToOptions = function (arr, options) {
     }, []);
 };
 /**
+ * 数据类型处理中转
+ * @param data 数组数据
+ * @param valueType 返回数据类型
+ * @param options 其他参数
+ */
+exports.transitData = function (data, valueType, options) {
+    if (valueType === void 0) { valueType = 'array'; }
+    if (data instanceof Array) {
+        if (valueType === 'array') {
+            return exports.arrayToOptions(data, options);
+        }
+        if (valueType === 'object') {
+            return exports.arrayToObject(data, options);
+        }
+        if (valueType === 'treeArray') {
+            return exports.treeToOptions(data, options);
+        }
+        if (valueType === 'treeObject') {
+            return exports.treeToObject(data, options);
+        }
+    }
+    if (['array', 'treeArray'].includes(valueType)) {
+        return [];
+    }
+    if (['object', 'treeObject', 'treeCoordObject'].includes(valueType)) {
+        return {};
+    }
+    return data;
+};
+/**
  * 经纬度转换-腾讯地图转百度地图
  * @param lng 经度
  * @param lat 纬度
@@ -173,32 +203,27 @@ exports.getValueListByChildId = function (list, options) {
     return [];
 };
 /**
- * 数据类型处理中转
- * @param data 数组数据
- * @param valueType 返回数据类型
- * @param options 其他参数
+ * 设置数值精度
+ * @param num 数字
+ * @param options precision 精度
+ * @param options rounding 是否四舍五入
+ * @param options handle 数据自处理方法
  */
-exports.transitData = function (data, valueType, options) {
-    if (valueType === void 0) { valueType = 'array'; }
-    if (data instanceof Array) {
-        if (valueType === 'array') {
-            return exports.arrayToOptions(data, options);
+function precision(num, options) {
+    var _a = options || {}, _b = _a.precision, precision = _b === void 0 ? 2 : _b, _c = _a.rounding, rounding = _c === void 0 ? true : _c, handle = _a.handle;
+    num = Number(num);
+    if (judgment_1.isNumber(num)) {
+        var resultNum = handle ? handle === null || handle === void 0 ? void 0 : handle(num) : num;
+        if (rounding) {
+            return resultNum.toFixed(precision);
         }
-        if (valueType === 'object') {
-            return exports.arrayToObject(data, options);
-        }
-        if (valueType === 'treeArray') {
-            return exports.treeToOptions(data, options);
-        }
-        if (valueType === 'treeObject') {
-            return exports.treeToObject(data, options);
-        }
+        resultNum = resultNum.toStirng().split('.').map(function (m, mIndex) {
+            if (mIndex)
+                return m.substring(0, precision);
+            return m;
+        }).join('.');
+        return Number(resultNum);
     }
-    if (['array', 'treeArray'].includes(valueType)) {
-        return [];
-    }
-    if (['object', 'treeObject', 'treeCoordObject'].includes(valueType)) {
-        return {};
-    }
-    return data;
-};
+    return num;
+}
+exports.precision = precision;

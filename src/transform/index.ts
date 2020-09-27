@@ -1,4 +1,4 @@
-import { hasChild } from '../judgment'
+import { hasChild, isNumber } from '../judgment'
 
 /**
  * 对象数组转对象（用户表格过滤下拉框）
@@ -127,6 +127,41 @@ export const treeToOptions = (
 }
 
 /**
+ * 数据类型处理中转
+ * @param data 数组数据
+ * @param valueType 返回数据类型
+ * @param options 其他参数
+ */
+export const transitData = (
+  data: any[],
+  valueType = 'array',
+  options: any
+) => {
+  if (data instanceof Array) {
+    if (valueType === 'array') {
+      return arrayToOptions(data, options)
+    }
+    if (valueType === 'object') {
+      return arrayToObject(data, options)
+    }
+    if (valueType === 'treeArray') {
+      return treeToOptions(data, options)
+    }
+    if (valueType === 'treeObject') {
+      return treeToObject(data, options)
+    }
+  }
+  if (['array', 'treeArray'].includes(valueType)) {
+    return []
+  }
+  if (['object', 'treeObject', 'treeCoordObject'].includes(valueType)) {
+    return {}
+  }
+  return data
+}
+
+
+/**
  * 经纬度转换-腾讯地图转百度地图
  * @param lng 经度
  * @param lat 纬度
@@ -198,36 +233,31 @@ export const getValueListByChildId = (list: any[], options: any): any[] => {
   return []
 }
 
+
 /**
- * 数据类型处理中转
- * @param data 数组数据
- * @param valueType 返回数据类型
- * @param options 其他参数
+ * 设置数值精度
+ * @param num 数字
+ * @param options precision 精度
+ * @param options rounding 是否四舍五入
+ * @param options handle 数据自处理方法
  */
-export const transitData = (
-  data: any[],
-  valueType = 'array',
-  options: any
-) => {
-  if (data instanceof Array) {
-    if (valueType === 'array') {
-      return arrayToOptions(data, options)
+export function precision(num: any, options: any) {
+  const {
+    precision = 2,
+    rounding = true,
+    handle
+  } = options || {}
+  num = Number(num)
+  if (isNumber(num)) {
+    let resultNum = handle ? handle?.(num) : num
+    if (rounding) {
+      return resultNum.toFixed(precision)
     }
-    if (valueType === 'object') {
-      return arrayToObject(data, options)
-    }
-    if (valueType === 'treeArray') {
-      return treeToOptions(data, options)
-    }
-    if (valueType === 'treeObject') {
-      return treeToObject(data, options)
-    }
+    resultNum = resultNum.toStirng().split('.').map((m: string, mIndex: number) => {
+      if (mIndex) return m.substring(0, precision)
+      return m
+    }).join('.')
+    return Number(resultNum)
   }
-  if (['array', 'treeArray'].includes(valueType)) {
-    return []
-  }
-  if (['object', 'treeObject', 'treeCoordObject'].includes(valueType)) {
-    return {}
-  }
-  return data
+  return num
 }

@@ -111,6 +111,10 @@ treeToObject: (arr: any[], options: any) => any;
 ```javascript
 treeToOptions: (arr: any[], options: any) => any;
 ```
+#### 数据类型处理中转
+```javascript
+transitData: (data: any[], valueType?: string, options: any) => any
+```
 #### 经纬度转换-腾讯地图转百度地图
 ```javascript
 QMapTransBMap: ({ lng: number, lat: number }) => { lng: number, lat: number }
@@ -123,7 +127,7 @@ BMapTransQMap: ({ lng: number, lat: number }) => { lng: number, lat: number }
 ```javascript
 getValueListByChildId: (list: any[], options: any) => any[]
 ```
-#### 数据类型处理中转
+#### 设置数值精度
 ```javascript
-transitData: (data: any[], valueType?: string, options: any) => any
+precision(num: any, options: any): any
 ```

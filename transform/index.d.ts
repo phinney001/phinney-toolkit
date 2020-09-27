@@ -35,6 +35,13 @@ export declare const treeToObject: (arr: any[], options: any) => any;
  */
 export declare const treeToOptions: (arr: any[], options: any) => any;
 /**
+ * 数据类型处理中转
+ * @param data 数组数据
+ * @param valueType 返回数据类型
+ * @param options 其他参数
+ */
+export declare const transitData: (data: any[], valueType: string | undefined, options: any) => any;
+/**
  * 经纬度转换-腾讯地图转百度地图
  * @param lng 经度
  * @param lat 纬度
@@ -67,9 +74,10 @@ export declare const BMapTransQMap: ({ lng, lat }: {
  */
 export declare const getValueListByChildId: (list: any[], options: any) => any[];
 /**
- * 数据类型处理中转
- * @param data 数组数据
- * @param valueType 返回数据类型
- * @param options 其他参数
+ * 设置数值精度
+ * @param num 数字
+ * @param options precision 精度
+ * @param options rounding 是否四舍五入
+ * @param options handle 数据自处理方法
  */
-export declare const transitData: (data: any[], valueType: string | undefined, options: any) => any;
+export declare function precision(num: any, options: any): any;
