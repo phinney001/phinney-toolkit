@@ -48,7 +48,7 @@ isNotNullOrUndefined: (data: any) => boolean
 ```
 #### 判断是否含有某个子节点
 ```javascript
-hasChild: (list: any[], value: any, valueName = 'value', childrenName = 'children') => boolean
+hasChild: (list: any[], options: any) => boolean
 ```
 
 ## storage 本地存储方法
@@ -97,33 +97,33 @@ forEach(cb: (key: string, value: any) => void): void
 ## transform 数据转换方法
 #### 对象数组转对象（用户表格过滤下拉框）
 ```javascript
-arrayToObject: (arr: any[], label?: string, value?: string, handleValue?: Function | undefined) => any;
+arrayToObject: (arr: any[], options: any) => any;
 ```
 #### 对象数组数据转换为下拉框使用数据
 ```javascript
-arrayToOptions: (arr: any[], label?: string, value?: string, hasAll?: boolean) => any;
+arrayToOptions: (arr: any[], options: any) => any;
 ```
 #### 树形数组转对象（用户表格过滤下拉框）
 ```javascript
-treeToObject: (arr: any[], label?: string, value?: string, children?: string, name?: string, linker?: string | boolean, handleValue?: Function | undefined) => any;
+treeToObject: (arr: any[], options: any) => any;
 ```
 #### 树形数组数据转换为下拉框使用数据
 ```javascript
-treeToOptions: (arr: any[], label?: string, value?: string, children?: string, hasAll?: boolean) => any;
+treeToOptions: (arr: any[], options: any) => any;
 ```
 #### 经纬度转换-腾讯地图转百度地图
 ```javascript
-QMapTransBMap: (lng: number, lat: number) => { lng: number, lat: number }
+QMapTransBMap: ({ lng: number, lat: number }) => { lng: number, lat: number }
 ```
 #### 经纬度转换-百度地图转腾讯地图
 ```javascript
-BMapTransQMap: (lng: number, lat: number) => { lng: number, lat: number }
+BMapTransQMap: ({ lng: number, lat: number }) => { lng: number, lat: number }
 ```
 #### 根据子节点id获取含有父级节点id列表
 ```javascript
-getValueListByChildId: (list: any[], value: any, valueName?: string, childrenName?: string) => any[]
+getValueListByChildId: (list: any[], options: any) => any[]
 ```
 #### 数据类型处理中转
 ```javascript
-transitData: (data: any[], valueType?: string, ...otherArgs: any[]) => any
+transitData: (data: any[], valueType?: string, options: any) => any
 ```

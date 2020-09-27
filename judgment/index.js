@@ -99,17 +99,20 @@ exports.isNotNullOrUndefined = function (data) {
 /**
  * 判断是否含有某个子节点
  * @param list 树形数据列表
- * @param value 节点id名称
- * @param valueName 节点id名称
- * @param childrenName 子级字段名称
+ * @param options value 节点id名称
+ * @param options valueName 节点id名称
+ * @param options childrenName 子级字段名称
  */
-exports.hasChild = function (list, value, valueName, childrenName) {
-    if (valueName === void 0) { valueName = 'value'; }
-    if (childrenName === void 0) { childrenName = 'children'; }
+exports.hasChild = function (list, options) {
+    var _a = options || {}, value = _a.value, _b = _a.valueName, valueName = _b === void 0 ? 'value' : _b, _c = _a.childrenName, childrenName = _c === void 0 ? 'children' : _c;
     if (list instanceof Array) {
         return list.some(function (s) {
             if (s[valueName] !== value && s[childrenName]) {
-                return exports.hasChild(s[childrenName], value);
+                return exports.hasChild(s[childrenName], {
+                    value: value,
+                    valueName: valueName,
+                    childrenName: childrenName,
+                });
             }
             return s[valueName] === value;
         });

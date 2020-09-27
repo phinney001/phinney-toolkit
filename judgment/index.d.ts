@@ -59,8 +59,8 @@ export declare const isNotNullOrUndefined: (data: any) => boolean;
 /**
  * 判断是否含有某个子节点
  * @param list 树形数据列表
- * @param value 节点id名称
- * @param valueName 节点id名称
- * @param childrenName 子级字段名称
+ * @param options value 节点id名称
+ * @param options valueName 节点id名称
+ * @param options childrenName 子级字段名称
  */
-export declare const hasChild: (list: any[], value: any, valueName?: string, childrenName?: string) => boolean;
+export declare const hasChild: (list: any[], options: any) => boolean;

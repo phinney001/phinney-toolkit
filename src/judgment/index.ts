@@ -104,15 +104,24 @@ export const isNotNullOrUndefined = (data: any) => {
 /**
  * 判断是否含有某个子节点
  * @param list 树形数据列表
- * @param value 节点id名称
- * @param valueName 节点id名称
- * @param childrenName 子级字段名称
+ * @param options value 节点id名称
+ * @param options valueName 节点id名称
+ * @param options childrenName 子级字段名称
  */
-export const hasChild = (list: any[], value: any, valueName = 'value', childrenName = 'children'): boolean => {
+export const hasChild = (list: any[], options: any): boolean => {
+  const {
+    value,
+    valueName = 'value',
+    childrenName = 'children',
+  } = options || {}
   if (list instanceof Array) {
     return list.some((s: any) => {
       if (s[valueName] !== value && s[childrenName]) {
-        return hasChild(s[childrenName], value)
+        return hasChild(s[childrenName], {
+          value,
+          valueName,
+          childrenName,
+        })
       }
       return s[valueName] === value
     })

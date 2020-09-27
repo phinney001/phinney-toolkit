@@ -36,13 +36,12 @@ var judgment_1 = require("../judgment");
 /**
  * 对象数组转对象（用户表格过滤下拉框）
  * @param arr 对象数组数据
- * @param label 字段名
- * @param value 字段值
- * @param handleValue 处理字段值方法
+ * @param options label 字段名
+ * @param options value 字段值
+ * @param options handleValue 处理字段值方法
  */
-exports.arrayToObject = function (arr, label, value, handleValue) {
-    if (label === void 0) { label = 'label'; }
-    if (value === void 0) { value = 'value'; }
+exports.arrayToObject = function (arr, options) {
+    var _a = options || {}, _b = _a.label, label = _b === void 0 ? 'label' : _b, _c = _a.value, value = _c === void 0 ? 'value' : _c, handleValue = _a.handleValue;
     return arr === null || arr === void 0 ? void 0 : arr.reduce(function (t, c) {
         var _a;
         return __assign(__assign({}, t), (_a = {}, _a[c[value]] = handleValue ? handleValue === null || handleValue === void 0 ? void 0 : handleValue(c) : c[label], _a));
@@ -51,57 +50,59 @@ exports.arrayToObject = function (arr, label, value, handleValue) {
 /**
  * 对象数组数据转换为下拉框使用数据
  * @param arr 对象数组数据
- * @param label 字段名
- * @param value 字段值
- * @param hasAll 是否返回其他字段数据
+ * @param options label 字段名
+ * @param options value 字段值
+ * @param options hasAll 是否返回其他字段数据
  */
-exports.arrayToOptions = function (arr, label, value, hasAll) {
-    if (label === void 0) { label = 'label'; }
-    if (value === void 0) { value = 'value'; }
-    if (hasAll === void 0) { hasAll = false; }
+exports.arrayToOptions = function (arr, options) {
+    var _a = options || {}, _b = _a.label, label = _b === void 0 ? 'label' : _b, _c = _a.value, value = _c === void 0 ? 'value' : _c, _d = _a.hasAll, hasAll = _d === void 0 ? false : _d;
     return arr === null || arr === void 0 ? void 0 : arr.map(function (m) { return (__assign(__assign({}, (hasAll ? m : {})), { label: m[label], value: m[value] })); });
 };
 /**
  * 树形数组转对象（用户表格过滤下拉框）
  * @param arr 树形数组数据
- * @param label 字段名
- * @param value 字段值
- * @param children 子级字段名称
- * @param name 初始拼接名称
- * @param linker 拼接链接符
- * @param handleValue 处理字段值方法
+ * @param options label 字段名
+ * @param options value 字段值
+ * @param options children 子级字段名称
+ * @param options name 初始拼接名称
+ * @param options linker 拼接链接符
+ * @param options handleValue 处理字段值方法
  */
-exports.treeToObject = function (arr, label, value, children, name, linker, handleValue) {
-    if (label === void 0) { label = 'label'; }
-    if (value === void 0) { value = 'value'; }
-    if (children === void 0) { children = 'children'; }
-    if (name === void 0) { name = ''; }
-    if (linker === void 0) { linker = '/'; }
+exports.treeToObject = function (arr, options) {
+    var _a = options || {}, _b = _a.label, label = _b === void 0 ? 'label' : _b, _c = _a.value, value = _c === void 0 ? 'value' : _c, _d = _a.children, children = _d === void 0 ? 'children' : _d, _e = _a.name, name = _e === void 0 ? '' : _e, _f = _a.linker, linker = _f === void 0 ? '/' : _f, handleValue = _a.handleValue;
     return arr === null || arr === void 0 ? void 0 : arr.reduce(function (t, c) {
         var _a;
         var newLabel = name + c[label];
         return __assign(__assign(__assign({}, t), (_a = {}, _a[c[value]] = handleValue ? handleValue === null || handleValue === void 0 ? void 0 : handleValue(c) : (linker === false ? c[label] : newLabel), _a)), (c.children instanceof Array
-            ? exports.treeToObject(c[children], label, value, children, newLabel + linker, linker)
+            ? exports.treeToObject(c[children], {
+                label: label,
+                value: value,
+                children: children,
+                name: newLabel + linker,
+                linker: linker,
+            })
             : {}));
     }, {});
 };
 /**
  * 树形数组数据转换为下拉框使用数据
  * @param arr 树形数组数据
- * @param label 字段名
- * @param value 字段值
- * @param children 子级字段名称
- * @param hasAll 是否返回其他字段数据
+ * @param options label 字段名
+ * @param options value 字段值
+ * @param options children 子级字段名称
+ * @param options hasAll 是否返回其他字段数据
  */
-exports.treeToOptions = function (arr, label, value, children, hasAll) {
-    if (label === void 0) { label = 'label'; }
-    if (value === void 0) { value = 'value'; }
-    if (children === void 0) { children = 'children'; }
-    if (hasAll === void 0) { hasAll = false; }
+exports.treeToOptions = function (arr, options) {
+    var _a = options || {}, _b = _a.label, label = _b === void 0 ? 'label' : _b, _c = _a.value, value = _c === void 0 ? 'value' : _c, _d = _a.children, children = _d === void 0 ? 'children' : _d, _e = _a.hasAll, hasAll = _e === void 0 ? false : _e;
     return arr === null || arr === void 0 ? void 0 : arr.reduce(function (t, c) {
         return __spread(t, [
             __assign(__assign({}, (hasAll ? c : {})), { value: c[value], label: c[label], children: c[children] instanceof Array
-                    ? exports.treeToOptions(c[children], label, value, children, hasAll)
+                    ? exports.treeToOptions(c[children], {
+                        label: label,
+                        value: value,
+                        children: children,
+                        hasAll: hasAll,
+                    })
                     : null }),
         ]);
     }, []);
@@ -111,7 +112,8 @@ exports.treeToOptions = function (arr, label, value, children, hasAll) {
  * @param lng 经度
  * @param lat 纬度
  */
-exports.QMapTransBMap = function (lng, lat) {
+exports.QMapTransBMap = function (_a) {
+    var lng = _a.lng, lat = _a.lat;
     if (!lng || !lat)
         return { lng: lng, lat: lat };
     var x = parseFloat(lng.toString());
@@ -128,7 +130,8 @@ exports.QMapTransBMap = function (lng, lat) {
  * @param lng 经度
  * @param lat 纬度
  */
-exports.BMapTransQMap = function (lng, lat) {
+exports.BMapTransQMap = function (_a) {
+    var lng = _a.lng, lat = _a.lat;
     if (!lng || !lat)
         return { lng: lng, lat: lat };
     var x = parseFloat(lng.toString()) - 0.0065;
@@ -143,19 +146,26 @@ exports.BMapTransQMap = function (lng, lat) {
 /**
  * 根据子节点id获取含有父级节点id列表
  * @param list 树形数据列表
- * @param value 子级节点id
- * @param valueName 子级节点id名称
- * @param childrenName 子级字段名称
+ * @param options value 子级节点id
+ * @param options valueName 子级节点id名称
+ * @param options childrenName 子级字段名称
  */
-exports.getValueListByChildId = function (list, value, valueName, childrenName) {
-    if (valueName === void 0) { valueName = 'value'; }
-    if (childrenName === void 0) { childrenName = 'children'; }
+exports.getValueListByChildId = function (list, options) {
+    var _a = options || {}, value = _a.value, _b = _a.valueName, valueName = _b === void 0 ? 'value' : _b, _c = _a.childrenName, childrenName = _c === void 0 ? 'children' : _c;
     if (list instanceof Array) {
         return list.reduce(function (t, c) {
-            if (c[valueName] === value || judgment_1.hasChild(c[childrenName], value)) {
+            if (c[valueName] === value || judgment_1.hasChild(c[childrenName], {
+                value: value,
+                valueName: valueName,
+                childrenName: childrenName,
+            })) {
                 return __spread(t, [
                     c[valueName]
-                ], (exports.getValueListByChildId(c[childrenName], value, valueName, childrenName)));
+                ], (exports.getValueListByChildId(c[childrenName], {
+                    value: value,
+                    valueName: valueName,
+                    childrenName: childrenName,
+                })));
             }
             return t;
         }, []);
@@ -166,26 +176,22 @@ exports.getValueListByChildId = function (list, value, valueName, childrenName) 
  * 数据类型处理中转
  * @param data 数组数据
  * @param valueType 返回数据类型
- * @param otherArgs 其他参数
+ * @param options 其他参数
  */
-exports.transitData = function (data, valueType) {
+exports.transitData = function (data, valueType, options) {
     if (valueType === void 0) { valueType = 'array'; }
-    var otherArgs = [];
-    for (var _i = 2; _i < arguments.length; _i++) {
-        otherArgs[_i - 2] = arguments[_i];
-    }
     if (data instanceof Array) {
         if (valueType === 'array') {
-            return exports.arrayToOptions.apply(void 0, __spread([data], otherArgs));
+            return exports.arrayToOptions(data, options);
         }
         if (valueType === 'object') {
-            return exports.arrayToObject.apply(void 0, __spread([data], otherArgs));
+            return exports.arrayToObject(data, options);
         }
         if (valueType === 'treeArray') {
-            return exports.treeToOptions.apply(void 0, __spread([data], otherArgs));
+            return exports.treeToOptions(data, options);
         }
         if (valueType === 'treeObject') {
-            return exports.treeToObject.apply(void 0, __spread([data], otherArgs));
+            return exports.treeToObject(data, options);
         }
     }
     if (['array', 'treeArray'].includes(valueType)) {

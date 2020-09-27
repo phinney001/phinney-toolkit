@@ -3,16 +3,19 @@ import { hasChild } from '../judgment'
 /**
  * 对象数组转对象（用户表格过滤下拉框）
  * @param arr 对象数组数据
- * @param label 字段名
- * @param value 字段值
- * @param handleValue 处理字段值方法
+ * @param options label 字段名
+ * @param options value 字段值
+ * @param options handleValue 处理字段值方法
  */
 export const arrayToObject = (
   arr: any[],
-  label = 'label',
-  value = 'value',
-  handleValue?: Function
+  options: any,
 ): any => {
+  const {
+    label = 'label',
+    value = 'value',
+    handleValue,
+  } = options || {}
   return arr?.reduce((t: any, c: any) => {
     return {
       ...t,
@@ -24,16 +27,19 @@ export const arrayToObject = (
 /**
  * 对象数组数据转换为下拉框使用数据
  * @param arr 对象数组数据
- * @param label 字段名
- * @param value 字段值
- * @param hasAll 是否返回其他字段数据
+ * @param options label 字段名
+ * @param options value 字段值
+ * @param options hasAll 是否返回其他字段数据
  */
 export const arrayToOptions = (
   arr: any[],
-  label = 'label',
-  value = 'value',
-  hasAll = false,
+  options: any,
 ): any => {
+  const {
+    label = 'label',
+    value = 'value',
+    hasAll = false,
+  } = options || {}
   return arr?.map((m: any) => ({
     ...(hasAll ? m : {}),
     label: m[label],
@@ -44,29 +50,39 @@ export const arrayToOptions = (
 /**
  * 树形数组转对象（用户表格过滤下拉框）
  * @param arr 树形数组数据
- * @param label 字段名
- * @param value 字段值
- * @param children 子级字段名称
- * @param name 初始拼接名称
- * @param linker 拼接链接符
- * @param handleValue 处理字段值方法
+ * @param options label 字段名
+ * @param options value 字段值
+ * @param options children 子级字段名称
+ * @param options name 初始拼接名称
+ * @param options linker 拼接链接符
+ * @param options handleValue 处理字段值方法
  */
 export const treeToObject = (
   arr: any[],
-  label = 'label',
-  value = 'value',
-  children = 'children',
-  name = '',
-  linker: string | boolean = '/',
-  handleValue?: Function
+  options: any,
+
 ): any => {
+  const {
+    label = 'label',
+    value = 'value',
+    children = 'children',
+    name = '',
+    linker = '/',
+    handleValue,
+  } = options || {}
   return arr?.reduce((t: any, c: any) => {
     const newLabel = name + c[label]
     return {
       ...t,
       [c[value]]: handleValue ? handleValue?.(c) : (linker === false ? c[label] : newLabel),
       ...(c.children instanceof Array
-        ? treeToObject(c[children], label, value, children, newLabel + linker, linker)
+        ? treeToObject(c[children], {
+          label,
+          value,
+          children,
+          name: newLabel + linker,
+          linker,
+        })
         : {})
     }
   }, {})
@@ -75,18 +91,21 @@ export const treeToObject = (
 /**
  * 树形数组数据转换为下拉框使用数据
  * @param arr 树形数组数据
- * @param label 字段名
- * @param value 字段值
- * @param children 子级字段名称 
- * @param hasAll 是否返回其他字段数据
+ * @param options label 字段名
+ * @param options value 字段值
+ * @param options children 子级字段名称 
+ * @param options hasAll 是否返回其他字段数据
  */
 export const treeToOptions = (
   arr: any[],
-  label = 'label',
-  value = 'value',
-  children = 'children',
-  hasAll = false,
+  options: any,
 ): any => {
+  const {
+    label = 'label',
+    value = 'value',
+    children = 'children',
+    hasAll = false,
+  } = options || {}
   return arr?.reduce((t: any, c: any) => {
     return [
       ...t,
@@ -95,7 +114,12 @@ export const treeToOptions = (
         value: c[value],
         label: c[label],
         children: c[children] instanceof Array
-          ? treeToOptions(c[children], label, value, children, hasAll)
+          ? treeToOptions(c[children], {
+            label,
+            value,
+            children,
+            hasAll,
+          })
           : null
       },
     ]
@@ -107,7 +131,7 @@ export const treeToOptions = (
  * @param lng 经度
  * @param lat 纬度
  */
-export const QMapTransBMap = (lng: number, lat: number) => {
+export const QMapTransBMap = ({ lng, lat }: {lng: number, lat: number}) => {
   if (!lng || !lat) return { lng, lat }
   const x = parseFloat(lng.toString())
   const y = parseFloat(lat.toString())
@@ -125,7 +149,7 @@ export const QMapTransBMap = (lng: number, lat: number) => {
  * @param lng 经度
  * @param lat 纬度
  */
-export const BMapTransQMap = (lng: number, lat: number) => {
+export const BMapTransQMap = ({ lng, lat }: {lng: number, lat: number}) => {
   if (!lng || !lat) return { lng, lat }
   const x = parseFloat(lng.toString()) - 0.0065
   const y = parseFloat(lat.toString()) - 0.006
@@ -141,18 +165,31 @@ export const BMapTransQMap = (lng: number, lat: number) => {
 /**
  * 根据子节点id获取含有父级节点id列表
  * @param list 树形数据列表
- * @param value 子级节点id
- * @param valueName 子级节点id名称
- * @param childrenName 子级字段名称
+ * @param options value 子级节点id
+ * @param options valueName 子级节点id名称
+ * @param options childrenName 子级字段名称
  */
-export const getValueListByChildId = (list: any[], value: any, valueName = 'value', childrenName = 'children'): any[] => {
+export const getValueListByChildId = (list: any[], options: any): any[] => {
+  const {
+    value,
+    valueName = 'value',
+    childrenName = 'children',
+  } = options || {}
   if (list instanceof Array) {
     return list.reduce((t, c) => {
-      if (c[valueName] === value || hasChild(c[childrenName], value)) {
+      if (c[valueName] === value || hasChild(c[childrenName], {
+        value,
+        valueName,
+        childrenName,
+      })) {
         return [
           ...t,
           c[valueName],
-          ...(getValueListByChildId(c[childrenName], value, valueName, childrenName))
+          ...(getValueListByChildId(c[childrenName], {
+            value,
+            valueName,
+            childrenName,
+          }))
         ]
       }
       return t
@@ -165,25 +202,25 @@ export const getValueListByChildId = (list: any[], value: any, valueName = 'valu
  * 数据类型处理中转
  * @param data 数组数据
  * @param valueType 返回数据类型
- * @param otherArgs 其他参数
+ * @param options 其他参数
  */
 export const transitData = (
   data: any[],
   valueType = 'array',
-  ...otherArgs: any[]
+  options: any
 ) => {
   if (data instanceof Array) {
     if (valueType === 'array') {
-      return arrayToOptions(data, ...otherArgs)
+      return arrayToOptions(data, options)
     }
     if (valueType === 'object') {
-      return arrayToObject(data, ...otherArgs)
+      return arrayToObject(data, options)
     }
     if (valueType === 'treeArray') {
-      return treeToOptions(data, ...otherArgs)
+      return treeToOptions(data, options)
     }
     if (valueType === 'treeObject') {
-      return treeToObject(data, ...otherArgs)
+      return treeToObject(data, options)
     }
   }
   if (['array', 'treeArray'].includes(valueType)) {
