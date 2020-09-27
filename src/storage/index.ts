@@ -16,7 +16,7 @@ export class Storage {
   }
 
   // 存储数据长度
-  get size() {
+  get size(): number {
     return this.proto.length
   }
 

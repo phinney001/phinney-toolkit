@@ -7,7 +7,7 @@
 export declare class Storage {
     proto: any;
     constructor(proto: any);
-    get size(): any;
+    get size(): number;
     get keys(): Array<string>;
     get values(): Array<any>;
     get entries(): Array<any>;

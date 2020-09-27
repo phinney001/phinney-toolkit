@@ -11,11 +11,50 @@ export const isObject = (data: any, containNull = false) => {
 }
 
 /**
+ * 判断是否是非空对象
+ * @param data 数据
+ */
+export const isNotEmptyObject = (data: any) => {
+  return isObject(data) && !!(Reflect.ownKeys(data).length)
+}
+
+/**
  * 判断是否是数组
  * @param data 数据
  */
 export const isArray = (data: any) => {
   return data instanceof Array
+}
+
+/**
+ * 判断是否是非空数组
+ * @param data 数据
+ */
+export const isNotEmptyArray = (data: any) => {
+  return isArray(data) && !!(data.length)
+}
+
+/**
+ * 判断是否是字符串
+ * @param data 数据
+ */
+export const isString = (data: any) => {
+  return typeof data === 'string'
+}
+
+/**
+ * 判断是否是空字符串
+ * @param data 数据
+ * @param trim 是否去除前后空字符串判断
+ */
+export const isNotEmptyString = (data: any, trim = true) => {
+  if (isString(data)) {
+    return true
+  }
+  if (trim) {
+    return data.trim() !== ''
+  }
+  return data !== ''
 }
 
 /**
@@ -28,14 +67,6 @@ export const isNumber = (data: any, containNaN = false) => {
     return typeof data === 'number'
   }
   return typeof data === 'number' && !isNaN(data)
-}
-
-/**
- * 判断是否是字符串
- * @param data 数据
- */
-export const isString = (data: any) => {
-  return typeof data === 'string'
 }
 
 /**
@@ -63,16 +94,28 @@ export const isNull = (data: any) => {
 }
 
 /**
- * 判断是否是空字符串
+ * 判断是否不是null或undefined
  * @param data 数据
- * @param trim 是否去除前后空字符串判断
  */
-export const isEmptyString = (data: any, trim = true) => {
-  if (isString(data)) {
-    return false
+export const isNotNullOrUndefined = (data: any) => {
+  return !isNull(data) && !isUndefined(data)
+}
+
+/**
+ * 判断是否含有某个子节点
+ * @param list 树形数据列表
+ * @param value 节点id名称
+ * @param valueName 节点id名称
+ * @param childrenName 子级字段名称
+ */
+export const hasChild = (list: any[], value: any, valueName = 'value', childrenName = 'children'): boolean => {
+  if (list instanceof Array) {
+    return list.some((s: any) => {
+      if (s[valueName] !== value && s[childrenName]) {
+        return hasChild(s[childrenName], value)
+      }
+      return s[valueName] === value
+    })
   }
-  if (trim) {
-    return data.trim() === ''
-  }
-  return data === ''
+  return false
 }
