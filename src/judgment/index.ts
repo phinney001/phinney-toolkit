@@ -1,5 +1,5 @@
 /**
- * 判断是否是对象
+ * 判断对象
  * @param data 数据
  * @param containNull 是否包含null
  */
@@ -11,7 +11,7 @@ export const isObject = (data: any, containNull = false) => {
 }
 
 /**
- * 判断是否是非空对象
+ * 判断非空对象
  * @param data 数据
  */
 export const isNotEmptyObject = (data: any) => {
@@ -19,7 +19,7 @@ export const isNotEmptyObject = (data: any) => {
 }
 
 /**
- * 判断是否是数组
+ * 判断数组
  * @param data 数据
  */
 export const isArray = (data: any) => {
@@ -27,7 +27,7 @@ export const isArray = (data: any) => {
 }
 
 /**
- * 判断是否是非空数组
+ * 判断非空数组
  * @param data 数据
  */
 export const isNotEmptyArray = (data: any) => {
@@ -35,7 +35,7 @@ export const isNotEmptyArray = (data: any) => {
 }
 
 /**
- * 判断是否是字符串
+ * 判断字符串
  * @param data 数据
  */
 export const isString = (data: any) => {
@@ -43,7 +43,7 @@ export const isString = (data: any) => {
 }
 
 /**
- * 判断是否是空字符串
+ * 判断非空字符串
  * @param data 数据
  * @param trim 是否去除前后空字符串判断
  */
@@ -58,7 +58,7 @@ export const isNotEmptyString = (data: any, trim = true) => {
 }
 
 /**
- * 判断是否是数值
+ * 判断数值
  * @param data 数据
  * @param containNaN 是否包含NaN
  */
@@ -70,7 +70,7 @@ export const isNumber = (data: any, containNaN = false) => {
 }
 
 /**
- * 判断是否是布尔值
+ * 判断布尔值
  * @param data 数据
  */
 export const isBoolean = (data: any) => {
@@ -78,7 +78,7 @@ export const isBoolean = (data: any) => {
 }
 
 /**
- * 判断是否是undefined
+ * 判断undefined
  * @param data 数据
  */
 export const isUndefined = (data: any) => {
@@ -86,7 +86,7 @@ export const isUndefined = (data: any) => {
 }
 
 /**
- * 判断是否是null
+ * 判断null
  * @param data 数据
  */
 export const isNull = (data: any) => {
@@ -94,7 +94,7 @@ export const isNull = (data: any) => {
 }
 
 /**
- * 判断是否不是null或undefined
+ * 判断不是null或undefined
  * @param data 数据
  */
 export const isNotNullOrUndefined = (data: any) => {

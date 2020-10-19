@@ -209,7 +209,7 @@ exports.getValueListByChildId = function (list, options) {
  * @param options rounding 是否四舍五入
  * @param options handle 数据自处理方法
  */
-function precision(num, options) {
+exports.precision = function (num, options) {
     var _a = options || {}, _b = _a.precision, precision = _b === void 0 ? 2 : _b, _c = _a.rounding, rounding = _c === void 0 ? true : _c, handle = _a.handle;
     num = Number(num);
     if (judgment_1.isNumber(num)) {
@@ -225,5 +225,4 @@ function precision(num, options) {
         return Number(resultNum);
     }
     return num;
-}
-exports.precision = precision;
+};

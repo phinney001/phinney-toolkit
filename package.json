@@ -1,13 +1,14 @@
 {
   "name": "phinney-toolkit",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "toolkit",
   "main": "index.js",
   "types": "index.d.ts",
   "module": "index.d.ts",
   "scripts": {
     "compile": "tsc",
-    "prepublish": "npm run compile",
+    "update": "node update",
+    "prepublish": "npm run update && npm run compile",
     "test": "npm run compile"
   },
   "repository": {

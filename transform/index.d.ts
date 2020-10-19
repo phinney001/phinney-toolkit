@@ -80,4 +80,4 @@ export declare const getValueListByChildId: (list: any[], options?: any) => any[
  * @param options rounding 是否四舍五入
  * @param options handle 数据自处理方法
  */
-export declare function precision(num: any, options?: any): any;
+export declare const precision: (num: any, options?: any) => any;

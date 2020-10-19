@@ -60,7 +60,6 @@ export const arrayToOptions = (
 export const treeToObject = (
   arr: any[],
   options?: any,
-
 ): any => {
   const {
     label = 'label',
@@ -241,7 +240,7 @@ export const getValueListByChildId = (list: any[], options?: any): any[] => {
  * @param options rounding 是否四舍五入
  * @param options handle 数据自处理方法
  */
-export function precision(num: any, options?: any) {
+export const precision = (num: any, options?: any) => {
   const {
     precision = 2,
     rounding = true,

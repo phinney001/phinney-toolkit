@@ -97,19 +97,19 @@ forEach(cb: (key: string, value: any) => void): void
 ## transform 数据转换方法
 #### 对象数组转对象（用户表格过滤下拉框）
 ```javascript
-arrayToObject: (arr: any[], options: any) => any;
+arrayToObject: (arr: any[], options: any) => any
 ```
 #### 对象数组数据转换为下拉框使用数据
 ```javascript
-arrayToOptions: (arr: any[], options: any) => any;
+arrayToOptions: (arr: any[], options: any) => any
 ```
 #### 树形数组转对象（用户表格过滤下拉框）
 ```javascript
-treeToObject: (arr: any[], options: any) => any;
+treeToObject: (arr: any[], options: any) => any
 ```
 #### 树形数组数据转换为下拉框使用数据
 ```javascript
-treeToOptions: (arr: any[], options: any) => any;
+treeToOptions: (arr: any[], options: any) => any
 ```
 #### 数据类型处理中转
 ```javascript
