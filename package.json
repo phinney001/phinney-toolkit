@@ -1,6 +1,6 @@
 {
   "name": "phinney-toolkit",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "description": "toolkit",
   "main": "index.js",
   "types": "index.d.ts",
@@ -8,7 +8,7 @@
   "scripts": {
     "compile": "tsc",
     "update": "node update",
-    "prepublish": "npm run update && npm run compile",
+    "prepublish": "npm run update && npm run compile && version update",
     "test": "npm run compile"
   },
   "repository": {
@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/phinney001/Toolkit#readme",
   "devDependencies": {
+    "package-version-update": "^1.0.3",
     "typescript": "^3.9.6"
   }
 }

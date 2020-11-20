@@ -131,3 +131,29 @@ getValueListByChildId: (list: any[], options: any) => any[]
 ```javascript
 precision(num: any, options: any): any
 ```
+
+## absolute 获取绝对数据类型
+#### 根据数据源获取数据
+```javascript
+getDataByOrigin: (origin: any, path: string, defaults?: any)
+```
+#### 根据数据源获取数组
+```javascript
+getArray: (origin: any, path: string, defaults = [])
+```
+#### 根据数据源获取对象
+```javascript
+getObject: (origin: any, path: string, defaults = {})
+```
+#### 根据数据源获取字符串
+```javascript
+getString: (origin: any, path: string, defaults = '')
+```
+#### 根据数据源获取数值
+```javascript
+getNumber: (origin: any, path: string, defaults = 0)
+```
+#### 根据数据源获取布尔值
+```javascript
+getBoolean: (origin: any, path: string, defaults = false)
+```
