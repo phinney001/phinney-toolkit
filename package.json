@@ -1,6 +1,6 @@
 {
   "name": "phinney-toolkit",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "toolkit",
   "main": "index.js",
   "types": "index.d.ts",
@@ -28,6 +28,6 @@
   "homepage": "https://github.com/phinney001/Toolkit#readme",
   "devDependencies": {
     "package-version-update": "^1.0.3",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.7"
   }
 }
