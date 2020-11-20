@@ -15,9 +15,7 @@ class Update {
     console.log('正在更新index.ts...')
     const indexTsString = this.folderList.reduce((t, f) => {
       if (f === 'index.ts') return t
-      const fileString = fs.readFileSync(path.join(this.basePath, `${f}/index.ts`), 'utf-8')
-      const nameList = fileString.match(/(?<=export const ).*?(?= =)/g)
-      return t += `export { ${nameList.join(', ')} } from './${f}'\n`
+      return t += `export * from './${f}'\n`
     }, '')
     fs.writeFileSync(this.indexTsPath, indexTsString, 'utf-8')
     console.log('更新成功!')
