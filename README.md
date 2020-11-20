@@ -1,5 +1,9 @@
 # phinney-toolkit
 公共方法库
+#### 判断函数
+```javascript
+isFunction: (data: any)
+```
 
 ## judgment 判断数据类型
 #### 判断对象，containNull：是否包含null
@@ -156,4 +160,8 @@ getNumber: (origin: any, path: string, defaults = 0)
 #### 根据数据源获取布尔值
 ```javascript
 getBoolean: (origin: any, path: string, defaults = false)
+```
+#### 根据数据源获取函数
+```javascript
+getFunction: (origin: any, path: string, defaults = ()
 ```

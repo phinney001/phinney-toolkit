@@ -57,6 +57,11 @@ export declare const isNull: (data: any) => boolean;
  */
 export declare const isNotNullOrUndefined: (data: any) => boolean;
 /**
+ * 判断函数
+ * @param data 数据
+ */
+export declare const isFunction: (data: any) => boolean;
+/**
  * 判断是否含有某个子节点
  * @param list 树形数据列表
  * @param options value 节点id名称

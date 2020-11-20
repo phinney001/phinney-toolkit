@@ -41,3 +41,10 @@ export declare const getNumber: (origin: any, path: string, defaults?: number) =
  * @param defaults 默认返回值
  */
 export declare const getBoolean: (origin: any, path: string, defaults?: boolean) => any;
+/**
+ * 根据数据源获取函数
+ * @param origin 数据源
+ * @param path 数据路径
+ * @param defaults 默认返回值
+ */
+export declare const getFunction: (origin: any, path: string, defaults?: () => void) => any;

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.hasChild = exports.isNotNullOrUndefined = exports.isNull = exports.isUndefined = exports.isBoolean = exports.isNumber = exports.isNotEmptyString = exports.isString = exports.isNotEmptyArray = exports.isArray = exports.isNotEmptyObject = exports.isObject = void 0;
+exports.hasChild = exports.isFunction = exports.isNotNullOrUndefined = exports.isNull = exports.isUndefined = exports.isBoolean = exports.isNumber = exports.isNotEmptyString = exports.isString = exports.isNotEmptyArray = exports.isArray = exports.isNotEmptyObject = exports.isObject = void 0;
 /**
  * 判断对象
  * @param data 数据
@@ -95,6 +95,13 @@ exports.isNull = function (data) {
  */
 exports.isNotNullOrUndefined = function (data) {
     return !exports.isNull(data) && !exports.isUndefined(data);
+};
+/**
+ * 判断函数
+ * @param data 数据
+ */
+exports.isFunction = function (data) {
+    return typeof data === 'function';
 };
 /**
  * 判断是否含有某个子节点
