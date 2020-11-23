@@ -48,7 +48,7 @@ export const getObject = (origin: any, path: string, defaults = {}) => {
  */
 export const getString = (origin: any, path: string, defaults = '') => {
   const res = getDataByOrigin(origin, path, defaults)
-  return isString(res) ? res : defaults
+  return isString(res) ? res : (res?.toString() || defaults)
 }
 
 /**
@@ -59,7 +59,7 @@ export const getString = (origin: any, path: string, defaults = '') => {
  */
 export const getNumber = (origin: any, path: string, defaults = 0) => {
   const res = getDataByOrigin(origin, path, defaults)
-  return isNumber(res) ? res : defaults
+  return isNumber(res) ? res : (Number(res) || defaults)
 }
 
 /**
@@ -70,7 +70,7 @@ export const getNumber = (origin: any, path: string, defaults = 0) => {
  */
 export const getBoolean = (origin: any, path: string, defaults = false) => {
   const res = getDataByOrigin(origin, path, defaults)
-  return isBoolean(res) ? res : defaults
+  return isBoolean(res) ? res : (Boolean(res) || defaults)
 }
 
 /**

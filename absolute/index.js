@@ -49,7 +49,7 @@ exports.getObject = function (origin, path, defaults) {
 exports.getString = function (origin, path, defaults) {
     if (defaults === void 0) { defaults = ''; }
     var res = exports.getDataByOrigin(origin, path, defaults);
-    return judgment_1.isString(res) ? res : defaults;
+    return judgment_1.isString(res) ? res : ((res === null || res === void 0 ? void 0 : res.toString()) || defaults);
 };
 /**
  * 根据数据源获取数值
@@ -60,7 +60,7 @@ exports.getString = function (origin, path, defaults) {
 exports.getNumber = function (origin, path, defaults) {
     if (defaults === void 0) { defaults = 0; }
     var res = exports.getDataByOrigin(origin, path, defaults);
-    return judgment_1.isNumber(res) ? res : defaults;
+    return judgment_1.isNumber(res) ? res : (Number(res) || defaults);
 };
 /**
  * 根据数据源获取布尔值
@@ -71,7 +71,7 @@ exports.getNumber = function (origin, path, defaults) {
 exports.getBoolean = function (origin, path, defaults) {
     if (defaults === void 0) { defaults = false; }
     var res = exports.getDataByOrigin(origin, path, defaults);
-    return judgment_1.isBoolean(res) ? res : defaults;
+    return judgment_1.isBoolean(res) ? res : (Boolean(res) || defaults);
 };
 /**
  * 根据数据源获取函数
