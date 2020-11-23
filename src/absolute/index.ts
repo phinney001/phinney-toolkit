@@ -9,7 +9,7 @@ import { isArray, isBoolean, isNumber, isObject, isString, isFunction } from '..
  * @param defaults 默认返回值
  */
 export const getDataByOrigin = (origin: any, path: string, defaults?: any) => {
-  if (!origin || isString(path)) return defaults
+  if (!origin || !isString(path)) return defaults
 
   const result = path.split('.').reduce((t: any = {}, c: string) => {
     return t?.[c]

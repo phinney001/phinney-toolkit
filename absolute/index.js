@@ -10,7 +10,7 @@ var judgment_1 = require("../judgment");
  * @param defaults 默认返回值
  */
 exports.getDataByOrigin = function (origin, path, defaults) {
-    if (!origin || judgment_1.isString(path))
+    if (!origin || !judgment_1.isString(path))
         return defaults;
     var result = path.split('.').reduce(function (t, c) {
         if (t === void 0) { t = {}; }
