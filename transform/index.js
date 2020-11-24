@@ -263,17 +263,17 @@ exports.sum = function (origin, key, initVal) {
     if (judgment_1.isArray(origin)) {
         return origin.reduce(function (total, current, index) {
             var _a;
+            var stringKey = absolute_1.getString(key);
             if (judgment_1.isNumber(initVal)) {
-                return total + (key
-                    ? absolute_1.getNumber(current, judgment_1.isFunction(key) ? key(current, index) : key)
+                return total + absolute_1.getNumber(key
+                    ? judgment_1.isFunction(key) ? key(current, index) : current[stringKey]
                     : current);
             }
             if (judgment_1.isString(initVal)) {
-                return total + (key
-                    ? absolute_1.getString(current, judgment_1.isFunction(key) ? key(current, index) : key)
+                return total + absolute_1.getString(key
+                    ? judgment_1.isFunction(key) ? key(current, index) : current[stringKey]
                     : current);
             }
-            var stringKey = absolute_1.getString(key);
             if (judgment_1.isArray(initVal)) {
                 return __spread(total, (judgment_1.isFunction(key) ? key(current, index) : [current[stringKey]]));
             }

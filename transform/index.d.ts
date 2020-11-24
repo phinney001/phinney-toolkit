@@ -93,7 +93,7 @@ export declare const objectMerge: (origin?: any, newData?: any) => any;
  * @param key 要累计的字段或处理方法
  * @param initVal 初始值
  */
-export declare const sum: (origin?: any[], key?: string | Function | undefined, initVal?: number) => any;
+export declare const sum: (origin?: any[], key?: string | ((data: any[], index: number) => any) | undefined, initVal?: any) => any;
 /**
  * 根据取余获取数组数据项
  * @param arr 数组

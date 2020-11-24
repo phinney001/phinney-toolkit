@@ -293,24 +293,24 @@ export const objectMerge = (origin: any = {}, newData: any = {}) => {
  * @param key 要累计的字段或处理方法
  * @param initVal 初始值
  */
-export const sum = (origin: any[] = [], key?: string | Function, initVal = 0) => {
+export const sum = (origin: any[] = [], key?: string | ((data: any[], index: number) => any), initVal: any = 0) => {
   if (isArray(origin)) {
     return origin.reduce((total, current, index) => {
+      const stringKey = getString(key)
       if (isNumber(initVal)) {
-        return total + (
+        return total + getNumber(
           key
-          ? getNumber(current, isFunction(key) ? key(current, index) : key)
+          ? isFunction(key) ? key(current, index) : current[stringKey]
           : current
         )
       }
       if (isString(initVal)) {
-        return total + (
+        return total + getString(
           key
-          ? getString(current, isFunction(key) ? key(current, index) : key)
+          ? isFunction(key) ? key(current, index) : current[stringKey]
           : current
         )
       }
-      const stringKey = getString(key)
       if (isArray(initVal)) {
         return [
           ...total,
