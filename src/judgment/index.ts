@@ -3,7 +3,7 @@
  * @param data 数据
  * @param containNull 是否包含null
  */
-export const isObject = (data: any, containNull = false) => {
+export const isObject = (data: any, containNull = false): data is object => {
   if (containNull) {
     return typeof data === 'object'
   }
@@ -14,7 +14,7 @@ export const isObject = (data: any, containNull = false) => {
  * 判断非空对象
  * @param data 数据
  */
-export const isNotEmptyObject = (data: any) => {
+export const isNotEmptyObject = (data: any): data is object => {
   return isObject(data) && !!(Reflect.ownKeys(data).length)
 }
 
@@ -22,7 +22,7 @@ export const isNotEmptyObject = (data: any) => {
  * 判断数组
  * @param data 数据
  */
-export const isArray = (data: any) => {
+export const isArray = (data: any): data is any[] => {
   return data instanceof Array
 }
 
@@ -30,7 +30,7 @@ export const isArray = (data: any) => {
  * 判断非空数组
  * @param data 数据
  */
-export const isNotEmptyArray = (data: any) => {
+export const isNotEmptyArray = (data: any): data is any[] => {
   return isArray(data) && !!(data.length)
 }
 
@@ -47,7 +47,7 @@ export const isString = (data: any) => {
  * @param data 数据
  * @param trim 是否去除前后空字符串判断
  */
-export const isNotEmptyString = (data: any, trim = true) => {
+export const isNotEmptyString = (data: any, trim = true): data is string => {
   if (isString(data)) {
     return true
   }
@@ -62,7 +62,7 @@ export const isNotEmptyString = (data: any, trim = true) => {
  * @param data 数据
  * @param containNaN 是否包含NaN
  */
-export const isNumber = (data: any, containNaN = false) => {
+export const isNumber = (data: any, containNaN = false): data is number => {
   if (containNaN) {
     return typeof data === 'number'
   }
@@ -73,7 +73,7 @@ export const isNumber = (data: any, containNaN = false) => {
  * 判断布尔值
  * @param data 数据
  */
-export const isBoolean = (data: any) => {
+export const isBoolean = (data: any): data is boolean => {
   return typeof data === 'boolean'
 }
 
@@ -105,7 +105,7 @@ export const isNotNullOrUndefined = (data: any) => {
  * 判断函数
  * @param data 数据
  */
-export const isFunction = (data: any) => {
+export const isFunction = (data: any): data is Function => {
   return typeof data === 'function'
 }
 

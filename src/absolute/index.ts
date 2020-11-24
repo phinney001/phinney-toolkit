@@ -24,7 +24,7 @@ export const getDataByOrigin = (origin: any, path: string, defaults?: any) => {
  * @param path 数据路径
  * @param defaults 默认返回值
  */
-export const getArray = (origin: any, path: string, defaults = []) => {
+export const getArray = (origin: any, path: string, defaults = []): any[] => {
   const res = getDataByOrigin(origin, path, defaults)
   return isArray(res) ? res : defaults
 }
@@ -35,7 +35,7 @@ export const getArray = (origin: any, path: string, defaults = []) => {
  * @param path 数据路径
  * @param defaults 默认返回值
  */
-export const getObject = (origin: any, path: string, defaults = {}) => {
+export const getObject = (origin: any, path: string, defaults = {}): object => {
   const res = getDataByOrigin(origin, path, defaults)
   return isObject(res) ? res : defaults
 }
@@ -46,7 +46,7 @@ export const getObject = (origin: any, path: string, defaults = {}) => {
  * @param path 数据路径
  * @param defaults 默认返回值
  */
-export const getString = (origin: any, path: string, defaults = '') => {
+export const getString = (origin: any, path: string, defaults = ''): string => {
   const res = getDataByOrigin(origin, path, defaults)
   return isString(res) ? res : (res?.toString() || defaults)
 }
@@ -57,7 +57,7 @@ export const getString = (origin: any, path: string, defaults = '') => {
  * @param path 数据路径
  * @param defaults 默认返回值
  */
-export const getNumber = (origin: any, path: string, defaults = 0) => {
+export const getNumber = (origin: any, path: string, defaults = 0): number => {
   const res = getDataByOrigin(origin, path, defaults)
   return isNumber(res) ? res : (Number(res) || defaults)
 }
@@ -68,7 +68,7 @@ export const getNumber = (origin: any, path: string, defaults = 0) => {
  * @param path 数据路径
  * @param defaults 默认返回值
  */
-export const getBoolean = (origin: any, path: string, defaults = false) => {
+export const getBoolean = (origin: any, path: string, defaults = false): boolean => {
   const res = getDataByOrigin(origin, path, defaults)
   return isBoolean(res) ? res : (Boolean(res) || defaults)
 }
@@ -79,7 +79,7 @@ export const getBoolean = (origin: any, path: string, defaults = false) => {
  * @param path 数据路径
  * @param defaults 默认返回值
  */
-export const getFunction = (origin: any, path: string, defaults = () => {}) => {
+export const getFunction = (origin: any, path: string, defaults = () => {}): Function => {
   const res = getDataByOrigin(origin, path, defaults)
   return isFunction(res) ? res : defaults
 }
