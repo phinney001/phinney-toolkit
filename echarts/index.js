@@ -22,8 +22,28 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spread = (this && this.__spread) || function () {
+    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
+    return ar;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getGrid = exports.getTooltip = exports.getFormatter = exports.getAxis = exports.getAxisLine = exports.getAxisTick = exports.getShadowOption = exports.getLineOption = exports.getLabelOption = exports.getTextOption = void 0;
+exports.setCandleColor = exports.setCandleNames = exports.getGrid = exports.getTooltip = exports.getFormatter = exports.getAxis = exports.getAxisLine = exports.getAxisTick = exports.getShadowOption = exports.getLineOption = exports.getLabelOption = exports.getTextOption = void 0;
 var absolute_1 = require("../absolute");
 var judgment_1 = require("../judgment");
 var transform_1 = require("../transform");
@@ -159,11 +179,11 @@ exports.getFormatter = function (dealFunc) {
             return params.reduce(function (total, current, index) {
                 total += dealFunc === null || dealFunc === void 0 ? void 0 : dealFunc(__assign(__assign({}, current), { index: index, content: "" + (((current === null || current === void 0 ? void 0 : current.axisValue) && !index)
                         ? ((current === null || current === void 0 ? void 0 : current.axisValue) + '<br>')
-                        : '') + absolute_1.getString(current, 'marker') + absolute_1.getString(current, 'seriesName') + ": " + absolute_1.getString(current, 'value', '-') }));
+                        : '') + absolute_1.getString(current, 'marker') + absolute_1.getString(current, 'seriesName') }));
                 return total;
             }, '');
         }
-        return dealFunc === null || dealFunc === void 0 ? void 0 : dealFunc(__assign(__assign({}, params), { content: "" + absolute_1.getString(params, 'marker') + absolute_1.getString(params, 'name') + ": " + absolute_1.getString(params, 'value', '-') }));
+        return dealFunc === null || dealFunc === void 0 ? void 0 : dealFunc(__assign(__assign({}, params), { content: "" + absolute_1.getString(params, 'marker') + absolute_1.getString(params, 'name') }));
     };
 };
 /**
@@ -204,4 +224,30 @@ exports.getTooltip = function (options) {
  */
 exports.getGrid = function (options) {
     return __assign({ top: 10, left: 0, right: 0, bottom: 0, containLabel: true }, options);
+};
+/**
+ * 设置烛形图名称
+ * @param names 烛形图名称列表 [open, close, lowest, highest]
+ */
+exports.setCandleNames = function (names) {
+    return {
+        dimensions: __spread(['ordinal'], names),
+        encode: {
+            tooltip: names
+        },
+    };
+};
+/**
+ * 设置烛形图颜色
+ * @param color 烛形图颜色
+ */
+exports.setCandleColor = function (color) {
+    return {
+        itemStyle: {
+            color: color,
+            color0: color,
+            borderColor: color,
+            borderColor0: color,
+        }
+    };
 };

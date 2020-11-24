@@ -328,3 +328,18 @@ export const sum = (origin: any[] = [], key?: string | Function, initVal = 0) =>
   }
   return initVal
 }
+
+/**
+ * 根据取余获取数组数据项
+ * @param arr 数组
+ * @param index 序列号
+ */
+export const getItemBySpare = (arr: any[], index: number) => {
+  if (!isArray(arr)) {
+    throw new Error('arr必须是数组！')
+  }
+  if (!isNumber(index)) {
+    throw new Error('index必须是数字！')
+  }
+  return arr[index % arr.length]
+}

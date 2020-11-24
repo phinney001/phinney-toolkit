@@ -65,3 +65,25 @@ export declare const getGrid: (options?: GridOptions | undefined) => {
     right: string | number;
     containLabel: boolean;
 };
+/**
+ * 设置烛形图名称
+ * @param names 烛形图名称列表 [open, close, lowest, highest]
+ */
+export declare const setCandleNames: (names: string[]) => {
+    dimensions: string[];
+    encode: {
+        tooltip: string[];
+    };
+};
+/**
+ * 设置烛形图颜色
+ * @param color 烛形图颜色
+ */
+export declare const setCandleColor: (color: string) => {
+    itemStyle: {
+        color: string;
+        color0: string;
+        borderColor: string;
+        borderColor0: string;
+    };
+};

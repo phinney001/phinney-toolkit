@@ -94,3 +94,9 @@ export declare const objectMerge: (origin?: any, newData?: any) => any;
  * @param initVal 初始值
  */
 export declare const sum: (origin?: any[], key?: string | Function | undefined, initVal?: number) => any;
+/**
+ * 根据取余获取数组数据项
+ * @param arr 数组
+ * @param index 序列号
+ */
+export declare const getItemBySpare: (arr: any[], index: number) => any;

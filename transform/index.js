@@ -31,7 +31,7 @@ var __spread = (this && this.__spread) || function () {
     return ar;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sum = exports.objectMerge = exports.precision = exports.getValueListByChildId = exports.BMapTransQMap = exports.QMapTransBMap = exports.transitData = exports.treeToOptions = exports.treeToObject = exports.arrayToOptions = exports.arrayToObject = void 0;
+exports.getItemBySpare = exports.sum = exports.objectMerge = exports.precision = exports.getValueListByChildId = exports.BMapTransQMap = exports.QMapTransBMap = exports.transitData = exports.treeToOptions = exports.treeToObject = exports.arrayToOptions = exports.arrayToObject = void 0;
 var absolute_1 = require("../absolute");
 var judgment_1 = require("../judgment");
 /**
@@ -284,4 +284,18 @@ exports.sum = function (origin, key, initVal) {
         }, initVal);
     }
     return initVal;
+};
+/**
+ * 根据取余获取数组数据项
+ * @param arr 数组
+ * @param index 序列号
+ */
+exports.getItemBySpare = function (arr, index) {
+    if (!judgment_1.isArray(arr)) {
+        throw new Error('arr必须是数组！');
+    }
+    if (!judgment_1.isNumber(index)) {
+        throw new Error('index必须是数字！');
+    }
+    return arr[index % arr.length];
 };

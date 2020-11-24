@@ -164,7 +164,7 @@ export const getAxis = (options?: AxisOptions) => {
     ...(Reflect.has(options, 'label') && { axisLabel: getLabelOption(label) }),
     ...(Reflect.has(options, 'tick') && { axisTick: getAxisTick(tick) }),
     ...(Reflect.has(options, 'line') && { axisLine: getAxisLine(line) }),
-    ...(Reflect.has(options, 'split')&& { splitLine: getAxisLine(split) }),
+    ...(Reflect.has(options, 'split') && { splitLine: getAxisLine(split) }),
   }, other)
 }
 
@@ -186,7 +186,6 @@ export const getFormatter = (dealFunc?: Function) => {
             : ''
             }${getString(current, 'marker')
             }${getString(current, 'seriesName')
-            }: ${getString(current, 'value', '-')
             }`
         })
         return total
@@ -196,7 +195,6 @@ export const getFormatter = (dealFunc?: Function) => {
       ...params,
       content: `${getString(params, 'marker')
         }${getString(params, 'name')
-        }: ${getString(params, 'value', '-')
         }`
     })
   }
@@ -232,19 +230,19 @@ export const getTooltip = (options?: TooltipOptions) => {
       textStyle: getTextOption({ color, size })
     }
     ),
-    ...(line &&  {
+    ...(line && {
       axisPointer: {
         type: 'line',
         lineStyle: getLineOption(line)
       }
     }),
-    ...(shadow &&  {
+    ...(shadow && {
       axisPointer: {
         type: 'shadow',
         shadowStyle: getShadowOption(shadow)
       }
     }),
-    ...(cross &&  {
+    ...(cross && {
       axisPointer: {
         type: 'cross',
         crossStyle: getLineOption(cross)
@@ -266,5 +264,33 @@ export const getGrid = (options?: GridOptions) => {
     bottom: 0,
     containLabel: true,
     ...options
+  }
+}
+
+/**
+ * 设置烛形图名称
+ * @param names 烛形图名称列表 [open, close, lowest, highest]
+ */
+export const setCandleNames = (names: string[]) => {
+  return {
+    dimensions: ['ordinal', ...names],
+    encode: {
+      tooltip: names
+    },
+  }
+}
+
+/**
+ * 设置烛形图颜色
+ * @param color 烛形图颜色
+ */
+export const setCandleColor = (color: string) => {
+  return {
+    itemStyle: {
+      color,
+      color0: color,
+      borderColor: color,
+      borderColor0: color,
+    }
   }
 }

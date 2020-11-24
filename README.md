@@ -12,6 +12,10 @@ objectMerge: (origin: any = {}, newData: any = {})
 ```javascript
 sum: (origin: any[] = [], key?: string | Function, initVal = 0)
 ```
+#### 根据取余获取数组数据项
+```javascript
+getItemBySpare: (arr: any[], index: number)
+```
 
 ## judgment 判断数据类型
 #### 判断对象，containNull：是否包含null
@@ -210,4 +214,12 @@ getTooltip: (options?: TooltipOptions)
 #### 获取初始grid配置
 ```javascript
 getGrid: (options?: GridOptions)
+```
+#### 设置烛形图名称
+```javascript
+setCandleNames: (names: string[])
+```
+#### 设置烛形图颜色
+```javascript
+setCandleColor: (color: string)
 ```
