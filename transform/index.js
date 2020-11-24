@@ -31,7 +31,8 @@ var __spread = (this && this.__spread) || function () {
     return ar;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.precision = exports.getValueListByChildId = exports.BMapTransQMap = exports.QMapTransBMap = exports.transitData = exports.treeToOptions = exports.treeToObject = exports.arrayToOptions = exports.arrayToObject = void 0;
+exports.sum = exports.objectMerge = exports.precision = exports.getValueListByChildId = exports.BMapTransQMap = exports.QMapTransBMap = exports.transitData = exports.treeToOptions = exports.treeToObject = exports.arrayToOptions = exports.arrayToObject = void 0;
+var absolute_1 = require("../absolute");
 var judgment_1 = require("../judgment");
 /**
  * 对象数组转对象（用户表格过滤下拉框）
@@ -225,4 +226,62 @@ exports.precision = function (num, options) {
         return Number(resultNum);
     }
     return num;
+};
+/**
+ * 对象合并
+ * @param origin 数据源
+ * @param newData 新数据
+ */
+exports.objectMerge = function (origin, newData) {
+    if (origin === void 0) { origin = {}; }
+    if (newData === void 0) { newData = {}; }
+    if (judgment_1.isObject(origin) && judgment_1.isObject(newData)) {
+        var keys = __spread(new Set(Reflect.ownKeys(origin)
+            .concat(Reflect.ownKeys(newData))));
+        return keys.reduce(function (map, key) {
+            var _a;
+            if (judgment_1.isObject(origin[key]) && judgment_1.isObject(newData[key])) {
+                map[key] = exports.objectMerge(origin[key], newData[key]);
+            }
+            else {
+                map[key] = (_a = newData[key]) !== null && _a !== void 0 ? _a : origin[key];
+            }
+            return map;
+        }, {});
+    }
+    return __assign(__assign({}, origin), newData);
+};
+/**
+ * 数据合计
+ * @param origin 数据源
+ * @param key 要累计的字段或处理方法
+ * @param initVal 初始值
+ */
+exports.sum = function (origin, key, initVal) {
+    if (origin === void 0) { origin = []; }
+    if (initVal === void 0) { initVal = 0; }
+    if (judgment_1.isArray(origin)) {
+        return origin.reduce(function (total, current, index) {
+            var _a;
+            if (judgment_1.isNumber(initVal)) {
+                return total + (key
+                    ? absolute_1.getNumber(current, judgment_1.isFunction(key) ? key(current, index) : key)
+                    : current);
+            }
+            if (judgment_1.isString(initVal)) {
+                return total + (key
+                    ? absolute_1.getString(current, judgment_1.isFunction(key) ? key(current, index) : key)
+                    : current);
+            }
+            var stringKey = absolute_1.getString(key);
+            if (judgment_1.isArray(initVal)) {
+                return __spread(total, (judgment_1.isFunction(key) ? key(current, index) : [current[stringKey]]));
+            }
+            if (judgment_1.isObject(initVal) && !judgment_1.isArray(initVal)) {
+                return __assign(__assign({}, total), (judgment_1.isFunction(key) ? key(current, index) : (_a = {}, _a[stringKey] = current[stringKey], _a)));
+            }
+            return total + current;
+        }, initVal);
+    }
+    return initVal;
 };

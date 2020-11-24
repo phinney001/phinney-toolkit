@@ -4,6 +4,14 @@
 ```javascript
 isFunction: (data: any)
 ```
+#### 对象合并
+```javascript
+objectMerge: (origin: any = {}, newData: any = {})
+```
+#### 数据合计
+```javascript
+sum: (origin: any[] = [], key?: string | Function, initVal = 0)
+```
 
 ## judgment 判断数据类型
 #### 判断对象，containNull：是否包含null
@@ -164,4 +172,42 @@ getBoolean: (origin: any, path: string, defaults = false)
 #### 根据数据源获取函数
 ```javascript
 getFunction: (origin: any, path: string, defaults = ()
+```
+
+## echarts echarts图表快捷方法
+#### 获取文本配置
+```javascript
+getTextOption: (options?: TextOption | boolean | string)
+```
+#### 获取标签配置
+```javascript
+getLabelOption: (options?: LabelOption | boolean | string)
+```
+#### 获取线配置
+```javascript
+getLineOption: (options?: LineOption | boolean | string)
+```
+#### 获取阴影配置
+```javascript
+getShadowOption: (options?: ShadowOption | boolean | string)
+```
+#### 获取刻度线配置
+```javascript
+getAxisTick: (options?: AxisTick | boolean | string)
+```
+#### 获取轴线配置
+```javascript
+getAxisLine: (options?: LineOption | boolean | string)
+```
+#### 获取formatter方法
+```javascript
+getFormatter: (dealFunc?: Function)
+```
+#### 获取初始tooltip提示框
+```javascript
+getTooltip: (options?: TooltipOptions)
+```
+#### 获取初始grid配置
+```javascript
+getGrid: (options?: GridOptions)
 ```

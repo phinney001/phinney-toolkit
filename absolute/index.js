@@ -26,7 +26,7 @@ exports.getDataByOrigin = function (origin, path, defaults) {
  */
 exports.getArray = function (origin, path, defaults) {
     if (defaults === void 0) { defaults = []; }
-    var res = exports.getDataByOrigin(origin, path, defaults);
+    var res = judgment_1.isUndefined(path) ? origin : exports.getDataByOrigin(origin, path || '', defaults);
     return judgment_1.isArray(res) ? res : defaults;
 };
 /**
@@ -37,7 +37,7 @@ exports.getArray = function (origin, path, defaults) {
  */
 exports.getObject = function (origin, path, defaults) {
     if (defaults === void 0) { defaults = {}; }
-    var res = exports.getDataByOrigin(origin, path, defaults);
+    var res = judgment_1.isUndefined(path) ? origin : exports.getDataByOrigin(origin, path || '', defaults);
     return judgment_1.isObject(res) ? res : defaults;
 };
 /**
@@ -48,7 +48,7 @@ exports.getObject = function (origin, path, defaults) {
  */
 exports.getString = function (origin, path, defaults) {
     if (defaults === void 0) { defaults = ''; }
-    var res = exports.getDataByOrigin(origin, path, defaults);
+    var res = judgment_1.isUndefined(path) ? origin : exports.getDataByOrigin(origin, path || '', defaults);
     return judgment_1.isString(res) ? res : ((res === null || res === void 0 ? void 0 : res.toString()) || defaults);
 };
 /**
@@ -59,7 +59,7 @@ exports.getString = function (origin, path, defaults) {
  */
 exports.getNumber = function (origin, path, defaults) {
     if (defaults === void 0) { defaults = 0; }
-    var res = exports.getDataByOrigin(origin, path, defaults);
+    var res = judgment_1.isUndefined(path) ? origin : exports.getDataByOrigin(origin, path || '', defaults);
     return judgment_1.isNumber(res) ? res : (Number(res) || defaults);
 };
 /**
@@ -70,7 +70,7 @@ exports.getNumber = function (origin, path, defaults) {
  */
 exports.getBoolean = function (origin, path, defaults) {
     if (defaults === void 0) { defaults = false; }
-    var res = exports.getDataByOrigin(origin, path, defaults);
+    var res = judgment_1.isUndefined(path) ? origin : exports.getDataByOrigin(origin, path || '', defaults);
     return judgment_1.isBoolean(res) ? res : (Boolean(res) || defaults);
 };
 /**
@@ -81,6 +81,6 @@ exports.getBoolean = function (origin, path, defaults) {
  */
 exports.getFunction = function (origin, path, defaults) {
     if (defaults === void 0) { defaults = function () { }; }
-    var res = exports.getDataByOrigin(origin, path, defaults);
+    var res = judgment_1.isUndefined(path) ? origin : exports.getDataByOrigin(origin, path || '', defaults);
     return judgment_1.isFunction(res) ? res : defaults;
 };

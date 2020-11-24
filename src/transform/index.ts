@@ -1,4 +1,5 @@
-import { hasChild, isNumber } from '../judgment'
+import { getNumber, getString } from '../absolute'
+import { hasChild, isArray, isFunction, isNumber, isObject, isString } from '../judgment'
 
 /**
  * 对象数组转对象（用户表格过滤下拉框）
@@ -259,4 +260,71 @@ export const precision = (num: any, options?: any) => {
     return Number(resultNum)
   }
   return num
+}
+
+/**
+ * 对象合并
+ * @param origin 数据源
+ * @param newData 新数据
+ */
+export const objectMerge = (origin: any = {}, newData: any = {}) => {
+  if (isObject(origin) && isObject(newData)) {
+    const keys = [...new Set(Reflect.ownKeys(origin)
+      .concat(Reflect.ownKeys(newData))
+    )]
+    return keys.reduce((map: any, key: any) => {
+      if (isObject(origin[key]) && isObject(newData[key])) {
+        map[key] = objectMerge(origin[key], newData[key])
+      } else {
+        map[key] = newData[key] ?? origin[key]
+      }
+      return map
+    }, {})
+  }
+  return {
+    ...origin,
+    ...newData
+  }
+}
+
+/**
+ * 数据合计
+ * @param origin 数据源
+ * @param key 要累计的字段或处理方法
+ * @param initVal 初始值
+ */
+export const sum = (origin: any[] = [], key?: string | Function, initVal = 0) => {
+  if (isArray(origin)) {
+    return origin.reduce((total, current, index) => {
+      if (isNumber(initVal)) {
+        return total + (
+          key
+          ? getNumber(current, isFunction(key) ? key(current, index) : key)
+          : current
+        )
+      }
+      if (isString(initVal)) {
+        return total + (
+          key
+          ? getString(current, isFunction(key) ? key(current, index) : key)
+          : current
+        )
+      }
+      const stringKey = getString(key)
+      if (isArray(initVal)) {
+        return [
+          ...total,
+          ...(isFunction(key) ? key(current, index) : [current[stringKey]])
+        ]
+      }
+      if (isObject(initVal) && !isArray(initVal)) {
+        return {
+          ...total,
+          ...(isFunction(key) ? key(current, index) : { [stringKey]: current[stringKey]})
+        }
+      }
+      return total + current
+    }, initVal)
+  }
+  return initVal
 }

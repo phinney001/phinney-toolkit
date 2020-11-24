@@ -3,7 +3,7 @@
  * @param data 数据
  * @param containNull 是否包含null
  */
-export const isObject = (data: any, containNull = false): data is object => {
+export const isObject = (data: any, containNull = false): data is any => {
   if (containNull) {
     return typeof data === 'object'
   }
@@ -14,7 +14,7 @@ export const isObject = (data: any, containNull = false): data is object => {
  * 判断非空对象
  * @param data 数据
  */
-export const isNotEmptyObject = (data: any): data is object => {
+export const isNotEmptyObject = (data: any): data is any => {
   return isObject(data) && !!(Reflect.ownKeys(data).length)
 }
 

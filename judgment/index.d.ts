@@ -3,12 +3,12 @@
  * @param data 数据
  * @param containNull 是否包含null
  */
-export declare const isObject: (data: any, containNull?: boolean) => data is object;
+export declare const isObject: (data: any, containNull?: boolean) => data is any;
 /**
  * 判断非空对象
  * @param data 数据
  */
-export declare const isNotEmptyObject: (data: any) => data is object;
+export declare const isNotEmptyObject: (data: any) => data is any;
 /**
  * 判断数组
  * @param data 数据

@@ -81,3 +81,16 @@ export declare const getValueListByChildId: (list: any[], options?: any) => any[
  * @param options handle 数据自处理方法
  */
 export declare const precision: (num: any, options?: any) => any;
+/**
+ * 对象合并
+ * @param origin 数据源
+ * @param newData 新数据
+ */
+export declare const objectMerge: (origin?: any, newData?: any) => any;
+/**
+ * 数据合计
+ * @param origin 数据源
+ * @param key 要累计的字段或处理方法
+ * @param initVal 初始值
+ */
+export declare const sum: (origin?: any[], key?: string | Function | undefined, initVal?: number) => any;
