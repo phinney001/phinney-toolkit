@@ -11,6 +11,14 @@ export const isObject = (data: any, containNull = false): data is any => {
 }
 
 /**
+ * 判断空对象
+ * @param data 数据
+ */
+export const isEmptyObject = (data: any): data is any => {
+  return isObject(data) && Boolean(Reflect.ownKeys(data).length)
+}
+
+/**
  * 判断非空对象
  * @param data 数据
  */
@@ -24,6 +32,14 @@ export const isNotEmptyObject = (data: any): data is any => {
  */
 export const isArray = (data: any): data is any[] => {
   return data instanceof Array
+}
+
+/**
+ * 判断空数组
+ * @param data 数据
+ */
+export const isEmptyArray = (data: any): data is any[] => {
+  return isArray(data) && Boolean(data.length)
 }
 
 /**
@@ -43,18 +59,24 @@ export const isString = (data: any) => {
 }
 
 /**
+ * 判断空字符串
+ * @param data 数据
+ * @param trim 是否去除前后空字符串判断
+ */
+export const isEmptyString = (data: any, trim = true): data is string => {
+  if (isString(data) && trim) {
+    return data.trim() === ''
+  }
+  return data === ''
+}
+
+/**
  * 判断非空字符串
  * @param data 数据
  * @param trim 是否去除前后空字符串判断
  */
 export const isNotEmptyString = (data: any, trim = true): data is string => {
-  if (isString(data)) {
-    return true
-  }
-  if (trim) {
-    return data.trim() !== ''
-  }
-  return data !== ''
+  return !isEmptyString(data, trim)
 }
 
 /**
@@ -91,6 +113,14 @@ export const isUndefined = (data: any) => {
  */
 export const isNull = (data: any) => {
   return data === null
+}
+
+/**
+ * 判断是null或undefined
+ * @param data 数据
+ */
+export const isNullOrUndefined = (data: any) => {
+  return isNull(data) || isUndefined(data)
 }
 
 /**
