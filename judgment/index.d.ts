@@ -5,6 +5,11 @@
  */
 export declare const isObject: (data: any, containNull?: boolean) => data is any;
 /**
+ * 判断空对象
+ * @param data 数据
+ */
+export declare const isEmptyObject: (data: any) => data is any;
+/**
  * 判断非空对象
  * @param data 数据
  */
@@ -15,6 +20,11 @@ export declare const isNotEmptyObject: (data: any) => data is any;
  */
 export declare const isArray: (data: any) => data is any[];
 /**
+ * 判断空数组
+ * @param data 数据
+ */
+export declare const isEmptyArray: (data: any) => data is any[];
+/**
  * 判断非空数组
  * @param data 数据
  */
@@ -24,6 +34,12 @@ export declare const isNotEmptyArray: (data: any) => data is any[];
  * @param data 数据
  */
 export declare const isString: (data: any) => boolean;
+/**
+ * 判断空字符串
+ * @param data 数据
+ * @param trim 是否去除前后空字符串判断
+ */
+export declare const isEmptyString: (data: any, trim?: boolean) => data is string;
 /**
  * 判断非空字符串
  * @param data 数据
@@ -51,6 +67,11 @@ export declare const isUndefined: (data: any) => boolean;
  * @param data 数据
  */
 export declare const isNull: (data: any) => boolean;
+/**
+ * 判断是null或undefined
+ * @param data 数据
+ */
+export declare const isNullOrUndefined: (data: any) => boolean;
 /**
  * 判断不是null或undefined
  * @param data 数据

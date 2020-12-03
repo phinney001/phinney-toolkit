@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.hasChild = exports.isFunction = exports.isNotNullOrUndefined = exports.isNull = exports.isUndefined = exports.isBoolean = exports.isNumber = exports.isNotEmptyString = exports.isString = exports.isNotEmptyArray = exports.isArray = exports.isNotEmptyObject = exports.isObject = void 0;
+exports.hasChild = exports.isFunction = exports.isNotNullOrUndefined = exports.isNullOrUndefined = exports.isNull = exports.isUndefined = exports.isBoolean = exports.isNumber = exports.isNotEmptyString = exports.isEmptyString = exports.isString = exports.isNotEmptyArray = exports.isEmptyArray = exports.isArray = exports.isNotEmptyObject = exports.isEmptyObject = exports.isObject = void 0;
 /**
  * 判断对象
  * @param data 数据
@@ -12,6 +12,13 @@ exports.isObject = function (data, containNull) {
         return typeof data === 'object';
     }
     return typeof data === 'object' && data !== null;
+};
+/**
+ * 判断空对象
+ * @param data 数据
+ */
+exports.isEmptyObject = function (data) {
+    return exports.isObject(data) && Boolean(Reflect.ownKeys(data).length);
 };
 /**
  * 判断非空对象
@@ -28,6 +35,13 @@ exports.isArray = function (data) {
     return data instanceof Array;
 };
 /**
+ * 判断空数组
+ * @param data 数据
+ */
+exports.isEmptyArray = function (data) {
+    return exports.isArray(data) && Boolean(data.length);
+};
+/**
  * 判断非空数组
  * @param data 数据
  */
@@ -42,19 +56,25 @@ exports.isString = function (data) {
     return typeof data === 'string';
 };
 /**
+ * 判断空字符串
+ * @param data 数据
+ * @param trim 是否去除前后空字符串判断
+ */
+exports.isEmptyString = function (data, trim) {
+    if (trim === void 0) { trim = true; }
+    if (exports.isString(data) && trim) {
+        return data.trim() === '';
+    }
+    return data === '';
+};
+/**
  * 判断非空字符串
  * @param data 数据
  * @param trim 是否去除前后空字符串判断
  */
 exports.isNotEmptyString = function (data, trim) {
     if (trim === void 0) { trim = true; }
-    if (exports.isString(data)) {
-        return true;
-    }
-    if (trim) {
-        return data.trim() !== '';
-    }
-    return data !== '';
+    return !exports.isEmptyString(data, trim);
 };
 /**
  * 判断数值
@@ -88,6 +108,13 @@ exports.isUndefined = function (data) {
  */
 exports.isNull = function (data) {
     return data === null;
+};
+/**
+ * 判断是null或undefined
+ * @param data 数据
+ */
+exports.isNullOrUndefined = function (data) {
+    return exports.isNull(data) || exports.isUndefined(data);
 };
 /**
  * 判断不是null或undefined

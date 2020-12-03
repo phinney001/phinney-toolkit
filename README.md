@@ -16,6 +16,22 @@ sum: (origin: any[] = [], key?: string | Function, initVal = 0)
 ```javascript
 getItemBySpare: (arr: any[], index: number)
 ```
+#### 判断空对象
+```javascript
+isEmptyObject: (data: any) => data is any
+```
+#### 判断空数组
+```javascript
+isEmptyArray: (data: any) => data is any[]
+```
+#### 判断空字符串
+```javascript
+isEmptyString: (data: any, trim = true) => data is string
+```
+#### 判断是null或undefined
+```javascript
+isNullOrUndefined: (data: any)
+```
 
 ## judgment 判断数据类型
 #### 判断对象，containNull：是否包含null
