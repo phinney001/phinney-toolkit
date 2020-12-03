@@ -15,7 +15,7 @@ export const isObject = (data: any, containNull = false): data is any => {
  * @param data 数据
  */
 export const isEmptyObject = (data: any): data is any => {
-  return isObject(data) && Boolean(Reflect.ownKeys(data).length)
+  return isObject(data) && !Boolean(Reflect.ownKeys(data).length)
 }
 
 /**
@@ -39,7 +39,7 @@ export const isArray = (data: any): data is any[] => {
  * @param data 数据
  */
 export const isEmptyArray = (data: any): data is any[] => {
-  return isArray(data) && Boolean(data.length)
+  return isArray(data) && !Boolean(data.length)
 }
 
 /**

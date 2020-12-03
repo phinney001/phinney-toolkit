@@ -18,7 +18,7 @@ exports.isObject = function (data, containNull) {
  * @param data 数据
  */
 exports.isEmptyObject = function (data) {
-    return exports.isObject(data) && Boolean(Reflect.ownKeys(data).length);
+    return exports.isObject(data) && !Boolean(Reflect.ownKeys(data).length);
 };
 /**
  * 判断非空对象
@@ -39,7 +39,7 @@ exports.isArray = function (data) {
  * @param data 数据
  */
 exports.isEmptyArray = function (data) {
-    return exports.isArray(data) && Boolean(data.length);
+    return exports.isArray(data) && !Boolean(data.length);
 };
 /**
  * 判断非空数组
