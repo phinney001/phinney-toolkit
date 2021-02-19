@@ -77,7 +77,7 @@ export class Storage {
    * 清空数据存储
    * @param except 需要保留的数据存储
    */
-  clear(except: Array<string>): void {
+  clear(except?: Array<string>): void {
     if (except) {
       this.keys.forEach((key) => {
         if (!except.includes(key)) {

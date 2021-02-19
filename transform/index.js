@@ -1,4 +1,3 @@
-"use strict";
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -30,10 +29,8 @@ var __spread = (this && this.__spread) || function () {
     for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
     return ar;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getItemBySpare = exports.sum = exports.objectMerge = exports.precision = exports.getValueListByChildId = exports.BMapTransQMap = exports.QMapTransBMap = exports.transitData = exports.treeToOptions = exports.treeToObject = exports.arrayToOptions = exports.arrayToObject = void 0;
-var absolute_1 = require("../absolute");
-var judgment_1 = require("../judgment");
+import { getNumber, getObject, getString } from '../absolute';
+import { hasChild, isArray, isFunction, isNumber, isObject, isString } from '../judgment';
 /**
  * 对象数组转对象（用户表格过滤下拉框）
  * @param arr 对象数组数据
@@ -41,7 +38,7 @@ var judgment_1 = require("../judgment");
  * @param options value 字段值
  * @param options handleValue 处理字段值方法
  */
-exports.arrayToObject = function (arr, options) {
+export var arrayToObject = function (arr, options) {
     var _a = options || {}, _b = _a.label, label = _b === void 0 ? 'label' : _b, _c = _a.value, value = _c === void 0 ? 'value' : _c, handleValue = _a.handleValue;
     return arr === null || arr === void 0 ? void 0 : arr.reduce(function (t, c) {
         var _a;
@@ -55,7 +52,7 @@ exports.arrayToObject = function (arr, options) {
  * @param options value 字段值
  * @param options hasAll 是否返回其他字段数据
  */
-exports.arrayToOptions = function (arr, options) {
+export var arrayToOptions = function (arr, options) {
     var _a = options || {}, _b = _a.label, label = _b === void 0 ? 'label' : _b, _c = _a.value, value = _c === void 0 ? 'value' : _c, _d = _a.hasAll, hasAll = _d === void 0 ? false : _d;
     return arr === null || arr === void 0 ? void 0 : arr.map(function (m) { return (__assign(__assign({}, (hasAll ? m : {})), { label: m[label], value: m[value] })); });
 };
@@ -69,13 +66,13 @@ exports.arrayToOptions = function (arr, options) {
  * @param options linker 拼接链接符
  * @param options handleValue 处理字段值方法
  */
-exports.treeToObject = function (arr, options) {
+export var treeToObject = function (arr, options) {
     var _a = options || {}, _b = _a.label, label = _b === void 0 ? 'label' : _b, _c = _a.value, value = _c === void 0 ? 'value' : _c, _d = _a.children, children = _d === void 0 ? 'children' : _d, _e = _a.name, name = _e === void 0 ? '' : _e, _f = _a.linker, linker = _f === void 0 ? '/' : _f, handleValue = _a.handleValue;
     return arr === null || arr === void 0 ? void 0 : arr.reduce(function (t, c) {
         var _a;
         var newLabel = name + c[label];
         return __assign(__assign(__assign({}, t), (_a = {}, _a[c[value]] = handleValue ? handleValue === null || handleValue === void 0 ? void 0 : handleValue(c) : (linker === false ? c[label] : newLabel), _a)), (c.children instanceof Array
-            ? exports.treeToObject(c[children], {
+            ? treeToObject(c[children], {
                 label: label,
                 value: value,
                 children: children,
@@ -93,12 +90,12 @@ exports.treeToObject = function (arr, options) {
  * @param options children 子级字段名称
  * @param options hasAll 是否返回其他字段数据
  */
-exports.treeToOptions = function (arr, options) {
+export var treeToOptions = function (arr, options) {
     var _a = options || {}, _b = _a.label, label = _b === void 0 ? 'label' : _b, _c = _a.value, value = _c === void 0 ? 'value' : _c, _d = _a.children, children = _d === void 0 ? 'children' : _d, _e = _a.hasAll, hasAll = _e === void 0 ? false : _e;
     return arr === null || arr === void 0 ? void 0 : arr.reduce(function (t, c) {
         return __spread(t, [
             __assign(__assign({}, (hasAll ? c : {})), { value: c[value], label: c[label], children: c[children] instanceof Array
-                    ? exports.treeToOptions(c[children], {
+                    ? treeToOptions(c[children], {
                         label: label,
                         value: value,
                         children: children,
@@ -114,20 +111,20 @@ exports.treeToOptions = function (arr, options) {
  * @param valueType 返回数据类型
  * @param options 其他参数
  */
-exports.transitData = function (data, valueType, options) {
+export var transitData = function (data, valueType, options) {
     if (valueType === void 0) { valueType = 'array'; }
     if (data instanceof Array) {
         if (valueType === 'array') {
-            return exports.arrayToOptions(data, options);
+            return arrayToOptions(data, options);
         }
         if (valueType === 'object') {
-            return exports.arrayToObject(data, options);
+            return arrayToObject(data, options);
         }
         if (valueType === 'treeArray') {
-            return exports.treeToOptions(data, options);
+            return treeToOptions(data, options);
         }
         if (valueType === 'treeObject') {
-            return exports.treeToObject(data, options);
+            return treeToObject(data, options);
         }
     }
     if (['array', 'treeArray'].includes(valueType)) {
@@ -143,7 +140,7 @@ exports.transitData = function (data, valueType, options) {
  * @param lng 经度
  * @param lat 纬度
  */
-exports.QMapTransBMap = function (_a) {
+export var QMapTransBMap = function (_a) {
     var lng = _a.lng, lat = _a.lat;
     if (!lng || !lat)
         return { lng: lng, lat: lat };
@@ -161,7 +158,7 @@ exports.QMapTransBMap = function (_a) {
  * @param lng 经度
  * @param lat 纬度
  */
-exports.BMapTransQMap = function (_a) {
+export var BMapTransQMap = function (_a) {
     var lng = _a.lng, lat = _a.lat;
     if (!lng || !lat)
         return { lng: lng, lat: lat };
@@ -181,18 +178,18 @@ exports.BMapTransQMap = function (_a) {
  * @param options valueName 子级节点id名称
  * @param options childrenName 子级字段名称
  */
-exports.getValueListByChildId = function (list, options) {
+export var getValueListByChildId = function (list, options) {
     var _a = options || {}, value = _a.value, _b = _a.valueName, valueName = _b === void 0 ? 'value' : _b, _c = _a.childrenName, childrenName = _c === void 0 ? 'children' : _c;
     if (list instanceof Array) {
         return list.reduce(function (t, c) {
-            if (c[valueName] === value || judgment_1.hasChild(c[childrenName], {
+            if (c[valueName] === value || hasChild(c[childrenName], {
                 value: value,
                 valueName: valueName,
                 childrenName: childrenName,
             })) {
                 return __spread(t, [
                     c[valueName]
-                ], (exports.getValueListByChildId(c[childrenName], {
+                ], (getValueListByChildId(c[childrenName], {
                     value: value,
                     valueName: valueName,
                     childrenName: childrenName,
@@ -210,10 +207,10 @@ exports.getValueListByChildId = function (list, options) {
  * @param options rounding 是否四舍五入
  * @param options handle 数据自处理方法
  */
-exports.precision = function (num, options) {
+export var precision = function (num, options) {
     var _a = options || {}, _b = _a.precision, precision = _b === void 0 ? 2 : _b, _c = _a.rounding, rounding = _c === void 0 ? true : _c, handle = _a.handle;
     num = Number(num);
-    if (judgment_1.isNumber(num)) {
+    if (isNumber(num)) {
         var resultNum = handle ? handle === null || handle === void 0 ? void 0 : handle(num) : num;
         if (rounding) {
             return resultNum.toFixed(precision);
@@ -232,16 +229,16 @@ exports.precision = function (num, options) {
  * @param origin 数据源
  * @param newData 新数据
  */
-exports.objectMerge = function (origin, newData) {
+export var objectMerge = function (origin, newData) {
     if (origin === void 0) { origin = {}; }
     if (newData === void 0) { newData = {}; }
-    if (judgment_1.isObject(origin) && judgment_1.isObject(newData)) {
+    if (isObject(origin) && isObject(newData)) {
         var keys = __spread(new Set(Reflect.ownKeys(origin)
             .concat(Reflect.ownKeys(newData))));
         return keys.reduce(function (map, key) {
             var _a;
-            if (judgment_1.isObject(origin[key]) && judgment_1.isObject(newData[key])) {
-                map[key] = exports.objectMerge(origin[key], newData[key]);
+            if (isObject(origin[key]) && isObject(newData[key])) {
+                map[key] = objectMerge(origin[key], newData[key]);
             }
             else {
                 map[key] = (_a = newData[key]) !== null && _a !== void 0 ? _a : origin[key];
@@ -257,28 +254,28 @@ exports.objectMerge = function (origin, newData) {
  * @param key 要累计的字段或处理方法
  * @param initVal 初始值
  */
-exports.sum = function (origin, key, initVal) {
+export var sum = function (origin, key, initVal) {
     if (origin === void 0) { origin = []; }
     if (initVal === void 0) { initVal = 0; }
-    if (judgment_1.isArray(origin)) {
+    if (isArray(origin)) {
         return origin.reduce(function (total, current, index) {
             var _a;
-            var stringKey = absolute_1.getString(key);
-            if (judgment_1.isNumber(initVal)) {
-                return total + absolute_1.getNumber(key
-                    ? judgment_1.isFunction(key) ? key(current, index) : current[stringKey]
+            var stringKey = getString(key);
+            if (isNumber(initVal)) {
+                return total + getNumber(key
+                    ? isFunction(key) ? key(current, index) : current[stringKey]
                     : current);
             }
-            if (judgment_1.isString(initVal)) {
-                return total + absolute_1.getString(key
-                    ? judgment_1.isFunction(key) ? key(current, index) : current[stringKey]
+            if (isString(initVal)) {
+                return total + getString(key
+                    ? isFunction(key) ? key(current, index) : current[stringKey]
                     : current);
             }
-            if (judgment_1.isArray(initVal)) {
-                return __spread(total, (judgment_1.isFunction(key) ? key(current, index) : [current[stringKey]]));
+            if (isArray(initVal)) {
+                return __spread(total, (isFunction(key) ? key(current, index) : [current[stringKey]]));
             }
-            if (judgment_1.isObject(initVal) && !judgment_1.isArray(initVal)) {
-                return __assign(__assign({}, total), (judgment_1.isFunction(key) ? key(current, index) : (_a = {}, _a[stringKey] = current[stringKey], _a)));
+            if (isObject(initVal) && !isArray(initVal)) {
+                return __assign(__assign({}, total), (isFunction(key) ? key(current, index) : (_a = {}, _a[stringKey] = current[stringKey], _a)));
             }
             return total + current;
         }, initVal);
@@ -290,12 +287,25 @@ exports.sum = function (origin, key, initVal) {
  * @param arr 数组
  * @param index 序列号
  */
-exports.getItemBySpare = function (arr, index) {
-    if (!judgment_1.isArray(arr)) {
+export var getItemBySpare = function (arr, index) {
+    if (!isArray(arr)) {
         throw new Error('arr必须是数组！');
     }
-    if (!judgment_1.isNumber(index)) {
+    if (!isNumber(index)) {
         throw new Error('index必须是数字！');
     }
     return arr[index % arr.length];
+};
+/**
+ * 对象转下拉框数据
+ * @param obj 对象
+ */
+export var objectToOptions = function (obj) {
+    return Object.entries(getObject(obj)).map(function (_a) {
+        var _b = __read(_a, 2), value = _b[0], label = _b[1];
+        return ({
+            value: value,
+            label: label,
+        });
+    });
 };

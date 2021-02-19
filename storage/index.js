@@ -1,4 +1,3 @@
-"use strict";
 var __read = (this && this.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
     if (!m) return o;
@@ -15,8 +14,6 @@ var __read = (this && this.__read) || function (o, n) {
     }
     return ar;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.session = exports.local = exports.Storage = void 0;
 /**
  * storage存储
  * @date 2020-07-06
@@ -128,8 +125,8 @@ var Storage = /** @class */ (function () {
     };
     return Storage;
 }());
-exports.Storage = Storage;
+export { Storage };
 // 长期本地存储
-exports.local = new Storage(localStorage);
+export var local = new Storage(localStorage);
 // 短期本地存储
-exports.session = new Storage(sessionStorage);
+export var session = new Storage(sessionStorage);

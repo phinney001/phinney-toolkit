@@ -1,4 +1,4 @@
-import { getNumber, getString } from '../absolute'
+import { getNumber, getObject, getString } from '../absolute'
 import { hasChild, isArray, isFunction, isNumber, isObject, isString } from '../judgment'
 
 /**
@@ -342,4 +342,15 @@ export const getItemBySpare = (arr: any[], index: number) => {
     throw new Error('index必须是数字！')
   }
   return arr[index % arr.length]
+}
+
+/**
+ * 对象转下拉框数据
+ * @param obj 对象
+ */
+export const objectToOptions = (obj: any): any[] => {
+  return Object.entries(getObject(obj)).map(([value, label]: any) => ({
+    value,
+    label,
+  }))
 }

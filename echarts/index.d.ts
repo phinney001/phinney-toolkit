@@ -53,12 +53,6 @@ export declare const getTooltip: (options?: TooltipOptions | undefined) => any;
  * @param options grid配置
  */
 export declare const getGrid: (options?: GridOptions | undefined) => {
-    top: number;
-    left: number;
-    right: number;
-    bottom: number;
-    containLabel: boolean;
-} | {
     top: string | number;
     bottom: string | number;
     left: string | number;

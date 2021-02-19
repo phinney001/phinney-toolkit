@@ -100,3 +100,8 @@ export declare const sum: (origin?: any[], key?: string | ((data: any[], index: 
  * @param index 序列号
  */
 export declare const getItemBySpare: (arr: any[], index: number) => any;
+/**
+ * 对象转下拉框数据
+ * @param obj 对象
+ */
+export declare const objectToOptions: (obj: any) => any[];

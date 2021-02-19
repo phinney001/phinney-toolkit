@@ -32,6 +32,10 @@ isEmptyString: (data: any, trim = true) => data is string
 ```javascript
 isNullOrUndefined: (data: any)
 ```
+#### 对象转下拉框数据
+```javascript
+objectToOptions: (obj: any) => any[]
+```
 
 ## judgment 判断数据类型
 #### 判断对象，containNull：是否包含null
