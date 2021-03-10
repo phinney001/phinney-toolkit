@@ -128,6 +128,14 @@ export var isFunction = function (data) {
     return typeof data === 'function';
 };
 /**
+ * 判断两个数据是否一样
+ * @param data1 数据1
+ * @param data2 数据2
+ */
+export var isSame = function (data1, data2) {
+    return JSON.stringify(data1) === JSON.stringify(data2);
+};
+/**
  * 判断是否含有某个子节点
  * @param list 树形数据列表
  * @param options value 节点id名称

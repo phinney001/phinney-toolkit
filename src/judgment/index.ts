@@ -140,6 +140,15 @@ export const isFunction = (data: any): data is Function => {
 }
 
 /**
+ * 判断两个数据是否一样
+ * @param data1 数据1
+ * @param data2 数据2
+ */
+export const isSame = (data1: any, data2: any): boolean => {
+  return JSON.stringify(data1) === JSON.stringify(data2)
+}
+
+/**
  * 判断是否含有某个子节点
  * @param list 树形数据列表
  * @param options value 节点id名称

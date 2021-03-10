@@ -36,6 +36,10 @@ isNullOrUndefined: (data: any)
 ```javascript
 objectToOptions: (obj: any) => any[]
 ```
+#### 判断两个数据是否一样
+```javascript
+isSame: (data1: any, data2: any) => boolean
+```
 
 ## judgment 判断数据类型
 #### 判断对象，containNull：是否包含null
