@@ -82,6 +82,7 @@ export const treeToObject = (
           children,
           name: newLabel + linker,
           linker,
+          handleValue
         })
         : {})
     }

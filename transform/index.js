@@ -78,6 +78,7 @@ export var treeToObject = function (arr, options) {
                 children: children,
                 name: newLabel + linker,
                 linker: linker,
+                handleValue: handleValue
             })
             : {}));
     }, {});
