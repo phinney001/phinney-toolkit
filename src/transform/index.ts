@@ -75,7 +75,7 @@ export const treeToObject = (
     return {
       ...t,
       [c[value]]: handleValue ? handleValue?.(c) : (linker === false ? c[label] : newLabel),
-      ...(c.children instanceof Array
+      ...(c[children] instanceof Array
         ? treeToObject(c[children], {
           label,
           value,

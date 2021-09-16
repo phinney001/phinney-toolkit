@@ -71,7 +71,7 @@ export var treeToObject = function (arr, options) {
     return arr === null || arr === void 0 ? void 0 : arr.reduce(function (t, c) {
         var _a;
         var newLabel = name + c[label];
-        return __assign(__assign(__assign({}, t), (_a = {}, _a[c[value]] = handleValue ? handleValue === null || handleValue === void 0 ? void 0 : handleValue(c) : (linker === false ? c[label] : newLabel), _a)), (c.children instanceof Array
+        return __assign(__assign(__assign({}, t), (_a = {}, _a[c[value]] = handleValue ? handleValue === null || handleValue === void 0 ? void 0 : handleValue(c) : (linker === false ? c[label] : newLabel), _a)), (c[children] instanceof Array
             ? treeToObject(c[children], {
                 label: label,
                 value: value,
